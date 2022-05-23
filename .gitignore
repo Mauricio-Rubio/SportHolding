@@ -21,5 +21,5 @@
 hs_err_pid*
 
 #Folder to ignore
-buid
-bin
+buid/
+bin/
