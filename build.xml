@@ -1,0 +1,18 @@
+<?xml version ="1.0" encoding ="UTF8"?>
+<project name = "Prueba" default="compile" basedir=".">
+    <target name="compile" description="Compilando codigo java">
+        <mkdir dir="build"/>
+        <javac srcdir = "src" destdir = "build" source="1.8" target="1.8" includeantruntime="false"/>
+    </target>
+    <target name="run" depends="compile" description="Ejecutando codigo java">
+        <java fork="true" classname="Main">
+            <classpath>
+                <path location="build"/>
+            </classpath>
+            </java>
+        </target>
+
+        <target name = "clean" description = "delete .class files">
+            <delete dir="build"/>
+                </target>
+</project>
