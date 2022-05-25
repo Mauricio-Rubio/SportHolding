@@ -1,4 +1,5 @@
 import Estructuras.*;
+import UI.Login;
 public class Main {
     public static void main(String[] args) {
         //User usr = new User();
@@ -7,8 +8,12 @@ public class Main {
         for (int i = 0; i < 5; i++) {
             miLista.add(i);
         }
-        ArbolBinarioBusqueda<Integer> arbolito = new ArbolBinarioBusqueda<>();
-        arbolito.buildSorted(miLista);
-        System.out.println("Arbol\n "+arbolito);
+        System.out.println("Lista\n "+miLista);
+        Login login = new Login();
+        login.run();
+        //ArbolBinarioBusqueda<Integer> arbolito = new ArbolBinarioBusqueda<>();
+        //arbolito.buildSorted(miLista);
+        //System.out.println("Arbol\n "+arbolito);
+        
     }
 }

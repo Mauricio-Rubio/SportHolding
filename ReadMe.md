@@ -18,6 +18,8 @@ Meanwhile, the compiled output files will be generated in the `build` folder by 
 - compile: `ant compile`
 
 ## To run (use ant)
+- Before to run, it's necessary have the Images folder into build folder, just copy (or cut) this folder located in SportHolding folder and paste it into build
+
 - run: `ant run`
 
 ## To delete .class folder (build folder)
