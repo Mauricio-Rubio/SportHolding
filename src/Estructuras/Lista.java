@@ -3,8 +3,8 @@ package Estructuras;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
-public class Lista<T> implements Collection<T> {
+import java.io.Serializable;
+public class Lista<T> implements Collection<T>, Serializable{
 
   private Nodo cabeza;
 
@@ -21,7 +21,7 @@ public class Lista<T> implements Collection<T> {
   public int longi;
 
   // Clase Nodo
-  private class Nodo {
+  private class Nodo implements Serializable {
 
     public T elemento;
     public Nodo anterior;

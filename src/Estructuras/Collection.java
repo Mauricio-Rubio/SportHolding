@@ -1,8 +1,8 @@
 package Estructuras;
 
-//import java.util.Comparator;
+import java.io.Serializable;
 
-public interface Collection<T> extends Iterable<T> {
+public interface Collection<T>  extends Iterable<T> {
 
     /**
      * Agrega un elemento a la colección.
