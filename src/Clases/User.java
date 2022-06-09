@@ -7,8 +7,8 @@ public class User implements Serializable{
 		this.name = name;
 		this.id=id;
 		this.money=money;
-        
 	}
+    
     private String name = "none";
     String id = "0000";
     private double money = 0;
