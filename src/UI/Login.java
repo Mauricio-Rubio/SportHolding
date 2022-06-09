@@ -14,7 +14,7 @@ public final class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setTitle("Sport Holding Login");
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Images/Logo.png")));
+        //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
         //this.run();
     }
 

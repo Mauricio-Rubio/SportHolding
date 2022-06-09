@@ -14,7 +14,7 @@ public final class SignIn extends javax.swing.JFrame {
     public SignIn() {
         initComponents();
         this.setTitle("Sport Holding Sign In");
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Images/Logo.png")));
+        //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Images/Logo.png")));
         //this.run();
     }
 
