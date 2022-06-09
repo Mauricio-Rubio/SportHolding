@@ -23,7 +23,11 @@ public class Main {
      list.add(pedroUser);
         list.add(beto);
        
+       // try{
         Lista<User> lista = DataBase.readObj("Hist.txt", list.getClass());
+      /*   }catch(Exception e){
+            DataBase.writeObj("Hist", obj)
+       }*/
        
     
   
