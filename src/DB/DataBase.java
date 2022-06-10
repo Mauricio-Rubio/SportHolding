@@ -1,7 +1,4 @@
 package DB;
-
-
-
 import Estructuras.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -58,7 +55,7 @@ public static <T extends Serializable> void readWrite(String fileName, T obj){
         }
         return obj;
     }
-
+    
 
     public static  <T> Lista<T>  readList(String fileName, T elem) {
         Lista<T> listp = new Lista();
