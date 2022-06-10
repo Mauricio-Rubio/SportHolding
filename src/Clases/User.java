@@ -35,7 +35,7 @@ public class User implements Serializable{
     }
     
     public void setMoney(double money){
-        this.money=money;
+        this.mount=money;
     }
     @Override 
     public String toString(){
