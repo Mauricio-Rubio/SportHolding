@@ -45,7 +45,7 @@ public static <T extends Serializable> void readWrite(String fileName, T obj){
     }
    // return null;
 }
-    public static <T> T readObj(String fileName, Class<T> objClass) {
+    public static <T> T readObj(String fileName) {
         T obj = null;
         try(FileInputStream fis = new FileInputStream(fileName);
                 ObjectInputStream door = new ObjectInputStream(fis);){
@@ -62,7 +62,7 @@ public static <T extends Serializable> void readWrite(String fileName, T obj){
         Lista<T> listp = new Lista();
         try(FileInputStream fis = new FileInputStream(fileName);
                 ObjectInputStream door = new ObjectInputStream(fis);){
-           Lista<T> list = readObj(fileName, listp.getClass());
+           Lista<T> list = readObj(fileName);
         return list;
         }catch(Exception c){
             System.out.println("No existe tal archivo");
