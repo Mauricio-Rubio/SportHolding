@@ -106,6 +106,7 @@ public final class SignIn extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tFUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tFUsernameFocusGained
