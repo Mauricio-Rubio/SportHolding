@@ -15,23 +15,33 @@ import Estructuras.*;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Prueba");
-        Lista<User> list = new Lista<User>();
+        Lista<User> list = new Lista();
+        Lista<User> list2 = new Lista();
         User pedroUser = new User("Pedro", "22009", 334.23);
         User al = new User("Al", "200009", 0.23);
        User beto = new User("Beto", "09", 33400.23);
        list.add(al);
      list.add(pedroUser);
         list.add(beto);
+
+        list2.add(pedroUser);
+        list2.add(pedroUser);
+        list2.add(pedroUser);
        // DataBase.writeObj("Hist.txt", list);
 	//juan.hist.add("100 peso");
     //juan.hist.add("Deposito");
-  // DataBase.writeObj("Hist.txt", list);
+  //DataBase.writeObj("Hist.txt", list);
     
-        Lista<User> lista = DataBase.readObj("Hist.txt", list.getClass());
+       DataBase.readWrite("Hist.txt", beto);
        //lista.empty();
     
-    //list = DataBase.readObj("Hist.txt", list.getClass());
-    User aux= new User("","", 0000);
+   list = DataBase.readObj("Hist.txt", list.getClass());
+   // DataBase.readWrite("Hist.txt", list2);
+    System.out.println(list.toString());
+    list.peek().hist.add("Deposito 100");
+    list.peek().hist.add("Retiro 300");
+    System.out.println(list.peek().hist);
+  /*  User aux= new User("","", 0000);
     System.out.println(lista.toString());
    // System.out.println(lista.peek().hist.toString());
     Iterator ite = lista.iterator();
@@ -52,7 +62,7 @@ public class Main {
        
     }
    lista.add(aux);
-   DataBase.writeObj("Hist.txt", lista);
+ //  DataBase.writeObj("Hist.txt", lista);*/
    
     }
 
