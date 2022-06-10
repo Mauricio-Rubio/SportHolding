@@ -1,20 +1,18 @@
 package UI;
 
 import java.awt.Toolkit;
-
+import Clases.Sistema;
 /**
  *
  * @author maurh
  */
 public final class Login extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Login
-     */
+    
+    Sistema sistema = new Sistema();
     public Login() {
         initComponents();
         this.setTitle("Sport Holding Login");
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Images/Logo.png")));
+        //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
         //this.run();
     }
 
@@ -33,8 +31,8 @@ public final class Login extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnLog = new javax.swing.JButton();
+        btnSign = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,6 +52,11 @@ public final class Login extends javax.swing.JFrame {
                 tFUsernameFocusGained(evt);
             }
         });
+        tFUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tFUsernameActionPerformed(evt);
+            }
+        });
         jPanel1.add(tFUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 116, 246, 35));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -70,27 +73,27 @@ public final class Login extends javax.swing.JFrame {
         jPasswordField1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 219, 246, 38));
 
-        jButton1.setBackground(new java.awt.Color(214, 169, 92));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLog.setBackground(new java.awt.Color(214, 169, 92));
+        btnLog.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnLog.setForeground(new java.awt.Color(255, 255, 255));
+        btnLog.setText("Login");
+        btnLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLogActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 293, 75, 35));
+        jPanel1.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 293, 75, 35));
 
-        jButton2.setBackground(new java.awt.Color(214, 169, 92));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Sign In");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSign.setBackground(new java.awt.Color(214, 169, 92));
+        btnSign.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSign.setForeground(new java.awt.Color(255, 255, 255));
+        btnSign.setText("Sign In");
+        btnSign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSignActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 293, -1, 35));
+        jPanel1.add(btnSign, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 293, -1, 35));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Fondo.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 337, 350));
@@ -107,22 +110,33 @@ public final class Login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tFUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tFUsernameFocusGained
         this.tFUsername.setText("");
     }//GEN-LAST:event_tFUsernameFocusGained
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
+        System.out.println("User "+tFUsername.getText());
+        System.out.println("password "+jPasswordField1.getText());
+        sistema.login(tFUsername.getText(),jPasswordField1.getText());
         dispose();
-        SignIn signin = new SignIn();
-        signin.run();
+        Menu menu = new Menu();
+        menu.run();
+        
+    }//GEN-LAST:event_btnLogActionPerformed
+
+    private void btnSignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignActionPerformed
+        dispose();
+        SignIn signin = new SignIn(sistema);
+        //signin.run();
         //this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSignActionPerformed
+
+    private void tFUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tFUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tFUsernameActionPerformed
     
     public void run(){
      new Login().setVisible(true);
@@ -148,8 +162,8 @@ public final class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnLog;
+    private javax.swing.JButton btnSign;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
