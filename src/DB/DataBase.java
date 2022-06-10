@@ -72,5 +72,4 @@ public static <T extends Serializable> void readWrite(String fileName, T obj){
         return null;
     }
 
-
 }

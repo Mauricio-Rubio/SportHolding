@@ -1,5 +1,6 @@
 package UI;
 
+import Clases.Sistema;
 import java.awt.Toolkit;
 
 /**
@@ -8,14 +9,14 @@ import java.awt.Toolkit;
  */
 public final class SignIn extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
-    public SignIn() {
+    Sistema sistema;
+    
+    public SignIn(Sistema sistema) {
         initComponents();
         this.setTitle("Sport Holding Sign In");
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Images/Logo.png")));
-        //this.run();
+        this.setVisible(true);
+        this.sistema = sistema;
     }
 
     /**
@@ -29,13 +30,13 @@ public final class SignIn extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        tFUsername = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtPassword2 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        txtPassword1 = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,14 +49,14 @@ public final class SignIn extends javax.swing.JFrame {
         jLabel1.setText("Sign In");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 80, 38));
 
-        tFUsername.setBackground(new java.awt.Color(204, 204, 204));
-        tFUsername.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tFUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtUser.setBackground(new java.awt.Color(204, 204, 204));
+        txtUser.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtUser.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                tFUsernameFocusGained(evt);
+                txtUserFocusGained(evt);
             }
         });
-        jPanel1.add(tFUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 246, 35));
+        jPanel1.add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 246, 35));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -67,9 +68,14 @@ public final class SignIn extends javax.swing.JFrame {
         jLabel3.setText("Enter a Password");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
 
-        jPasswordField1.setBackground(new java.awt.Color(204, 204, 204));
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 246, 38));
+        txtPassword2.setBackground(new java.awt.Color(204, 204, 204));
+        txtPassword2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtPassword2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassword2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtPassword2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 246, 38));
 
         jButton1.setBackground(new java.awt.Color(214, 169, 92));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -80,16 +86,16 @@ public final class SignIn extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 300, 80, 35));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(195, 300, 100, 35));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Enter a Password");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
-        jPasswordField2.setBackground(new java.awt.Color(204, 204, 204));
-        jPasswordField2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 246, 38));
+        txtPassword1.setBackground(new java.awt.Color(204, 204, 204));
+        txtPassword1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel1.add(txtPassword1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 246, 38));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Fondo.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 337, 350));
@@ -109,17 +115,20 @@ public final class SignIn extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tFUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tFUsernameFocusGained
-        this.tFUsername.setText("");
-    }//GEN-LAST:event_tFUsernameFocusGained
+    private void txtUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserFocusGained
+        this.txtUser.setText("");
+    }//GEN-LAST:event_txtUserFocusGained
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        sistema.signIn(txtUser.getText(), txtPassword1.getText());
+        Login login = new Login();
+        login.run();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtPassword2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassword2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPassword2ActionPerformed
     
-    public void run(){
-     new SignIn().setVisible(true);
-    }
     public void setNimbusLookAndFeel() {
 
         try {
@@ -148,9 +157,9 @@ public final class SignIn extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JTextField tFUsername;
+    private javax.swing.JPasswordField txtPassword1;
+    private javax.swing.JPasswordField txtPassword2;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 
 }
