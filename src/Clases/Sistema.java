@@ -13,6 +13,7 @@ public class Sistema {
         System.out.println("Contraseña que llega "+password);
         User aux = new User(username, password);
         User auxDB = DataBase.searchUser("Users.txt", username, password);
+        //User auxDB = null;
         activeUser = auxDB;
         System.out.println("auxDB "+auxDB);
         if(auxDB == null){
