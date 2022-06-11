@@ -14,10 +14,5 @@ public class Main {
         System.out.println("Iniciando");
         Login login = new Login();
         login.run();
-        
-        System.out.println("Prueba");
-        Lista<User> list = new Lista();
-        User pedroUser = new User("Pedro", "22009", 334.23);
-        DataBase.readWrite("Hist.txt", pedroUser);
-        list = DataBase.readObj("Hist.txt", list.getClass());    }
+    }
 }

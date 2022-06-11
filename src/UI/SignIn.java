@@ -123,6 +123,7 @@ public final class SignIn extends javax.swing.JFrame {
         sistema.signIn(txtUser.getText(), txtPassword1.getText());
         Login login = new Login();
         login.run();
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtPassword2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassword2ActionPerformed
