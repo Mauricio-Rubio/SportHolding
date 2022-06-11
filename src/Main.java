@@ -21,8 +21,8 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("Iniciando");
-       //Login login = new Login();
-       //login.run();
+       Login login = new Login();
+       login.run();
         System.out.println("Prueba");
         Lista<User> list = new Lista();
         Player a = new Player();
