@@ -1,6 +1,11 @@
 package UI;
 
+import Clases.Sistema;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -8,14 +13,43 @@ import java.awt.Toolkit;
  */
 public final class MenuUser extends javax.swing.JFrame {
 
+    public Sistema sistema;
+
     /**
      * Creates new form Login
      */
-    public MenuUser() {
+    public MenuUser(Sistema sistema) {
         initComponents();
         this.setTitle("Sport Holding");
+        this.closeWindow();
+        this.sistema = sistema;
+        this.setVisible(true);
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
         //this.run();
+    }
+
+    public void closeWindow() {
+        try {
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    confirmClose();
+
+                }
+            });
+            this.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void confirmClose() {
+        int z = JOptionPane.showConfirmDialog(this, "Do you want to exit?", "Warning", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+        if (z == JOptionPane.YES_OPTION) {
+            sistema.saveUser();
+            System.out.println("Salvando sistema");
+            System.exit(0);
+        }
     }
 
     /**
@@ -97,10 +131,10 @@ public final class MenuUser extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-    
-    public void run(){
-     new MenuUser().setVisible(true);
-    }
+
+    /* public void run(){
+     new Menu().setVisible(true);
+    }*/
     public void setNimbusLookAndFeel() {
 
         try {

@@ -148,10 +148,13 @@ public final class SignIn extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (txtPassword1.getText().equals(txtPassword2.getText())) {
-            sistema.signIn(txtUser.getText(), Encrypt.encrypt(txtPassword1.getText()));
+            if(sistema.signIn(txtUser.getText(), Encrypt.encrypt(txtPassword1.getText()))){
             Login login = new Login();
             login.run();
             dispose();
+            }else{
+            JOptionPane.showMessageDialog(null, "Please enter another user");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Passwords are not equal");
         }

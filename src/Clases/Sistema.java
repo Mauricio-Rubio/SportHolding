@@ -22,10 +22,19 @@ public class Sistema {
         return true;
     }
     
-    public void signIn(String username, String password){
+    
+    public boolean signIn(String username, String password){
         System.out.println("Contraseña que llega "+password);
         User aux = new User(username, password);
+        User auxDB = DataBase.searchUser("Users.txt", username, password);
+        if(auxDB != null){
         DataBase.readWrite("Users.txt", aux);
+        return false;
+        }else {
+            System.out.println("registering");
+            DataBase.writeObj("Users.txt", aux);
+            return true;
+        }
     }
     
     public void saveUser(){
