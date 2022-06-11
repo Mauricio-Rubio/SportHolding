@@ -3,6 +3,10 @@ package UI;
 import java.awt.Toolkit;
 import Clases.Sistema;
 import Clases.Encrypt;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +19,7 @@ public final class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         this.setTitle("Sport Holding Login");
+        this.closeWindow();
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
         //this.run();
     }
@@ -125,13 +130,32 @@ public final class Login extends javax.swing.JFrame {
         System.out.println("password "+jPasswordField1.getText());
         if (sistema.login(tFUsername.getText(), Encrypt.encrypt(jPasswordField1.getText()))) {
             dispose();
-            Menu menu = new Menu();
-            menu.run();
+            Menu menu = new Menu(sistema);
         }
 
 
     }//GEN-LAST:event_btnLogActionPerformed
 
+    public void closeWindow(){
+        try {
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter(){
+                public void windowClosing(WindowEvent e){
+                    confirmClose();
+                }
+            });
+            this.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void confirmClose(){
+        int z = JOptionPane.showConfirmDialog(this, "Do you want to exit?", "Warning", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+        if(z == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }
+    
     private void btnSignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignActionPerformed
         dispose();
         SignIn signin = new SignIn(sistema);

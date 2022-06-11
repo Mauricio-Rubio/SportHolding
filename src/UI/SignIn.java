@@ -3,6 +3,9 @@ package UI;
 import Clases.Sistema;
 import java.awt.Toolkit;
 import Clases.Encrypt;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,8 +20,30 @@ public final class SignIn extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Sport Holding Sign In");
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../Images/Logo.png")));
-        this.setVisible(true);
         this.sistema = sistema;
+        this.setVisible(true);
+        this.closeWindow();
+    }
+
+    public void closeWindow() {
+        try {
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    confirmClose();
+                }
+            });
+            this.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void confirmClose() {
+        int z = JOptionPane.showConfirmDialog(this, "Do you want to exit?", "Warning", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+        if (z == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
     }
 
     /**
@@ -127,8 +152,8 @@ public final class SignIn extends javax.swing.JFrame {
             Login login = new Login();
             login.run();
             dispose();
-        }else{
-         JOptionPane.showMessageDialog(null, "Passwords are not equal");
+        } else {
+            JOptionPane.showMessageDialog(null, "Passwords are not equal");
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
