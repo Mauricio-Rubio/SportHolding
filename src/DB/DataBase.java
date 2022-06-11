@@ -1,7 +1,4 @@
 package DB;
-
-
-
 import Estructuras.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,6 +6,10 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Iterator;
+
+import Clases.User;
+
 import java.io.File;
 
 public class DataBase{
@@ -28,6 +29,34 @@ public class DataBase{
         return sw;
     }
 
+public static User searchUser(String fileName, String name, String password){
+    Lista<User> list = new Lista();
+    User aux2 = null;
+    int k=1;
+    boolean finded=false;
+    list =  readObj(fileName, list.getClass());
+    if(list.isEmpty()){
+        System.out.println("No hay jugadores registrados");
+        return null;
+    }
+    Iterator ite = list.iterator();
+    while(ite.hasNext()&& finded==false){
+        finded=false;
+       User aux=(User) ite.next();
+        if(name.equals(aux.getName()) && password.equals(password)){
+            aux2 = (User) list.eliminarIndice(k);
+            finded=true;
+            writeObj(fileName, list);
+            return aux2;
+        }
+        k++;
+    }
+if(aux2==null){
+    System.out.println("Ese usuario no esta registrado");
+}
+    return null;
+
+}
 public static <T extends Serializable> void readWrite(String fileName, T obj){
     File f = new File(fileName);
     
@@ -58,7 +87,7 @@ public static <T extends Serializable> void readWrite(String fileName, T obj){
         }
         return obj;
     }
-
+    
 
     public static  <T> Lista<T>  readList(String fileName, T elem) {
         Lista<T> listp = new Lista();

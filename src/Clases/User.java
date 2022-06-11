@@ -1,4 +1,6 @@
 package Clases;
+import java.io.Serializable;
+import Estructuras.*;
 
 import java.io.Serializable;
 
@@ -19,16 +21,22 @@ public class User implements Serializable{
         this.mount = d;
     }
     
+
     public String getName(){
         return this.name;
     }
     public String getId(){
         return this.id;
     }
+
     public double getMount(){
         return this.mount;
+
     }
     
+    public void setMoney(double money){
+        this.mount=money;
+    }
     @Override 
     public String toString(){
         return this.name+" "+this.id+" "+this.mount;
