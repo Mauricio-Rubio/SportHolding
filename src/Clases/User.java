@@ -15,6 +15,18 @@ public class User implements Serializable{
     this.password = password;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setMount(double mount) {
+        this.mount = mount;
+    }
+
     public User(String name, String id, double d) {
         this.name = name;
         this.id = id;
@@ -33,12 +45,17 @@ public class User implements Serializable{
         return this.mount;
 
     }
-    
-    public void setMoney(double money){
-        this.mount=money;
+
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override 
     public String toString(){
-        return this.name+" "+this.id+" "+this.mount;
+        return this.name+" "+this.id+" "+this.mount+" "+this.password;
     }
 }

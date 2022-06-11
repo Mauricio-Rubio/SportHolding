@@ -2,6 +2,7 @@ package UI;
 
 import Clases.Sistema;
 import java.awt.Toolkit;
+import Clases.Encrypt;
 
 /**
  *
@@ -120,7 +121,7 @@ public final class SignIn extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUserFocusGained
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        sistema.signIn(txtUser.getText(), txtPassword1.getText());
+        sistema.signIn(txtUser.getText(), Encrypt.encrypt(txtPassword1.getText()));
         Login login = new Login();
         login.run();
         dispose();
