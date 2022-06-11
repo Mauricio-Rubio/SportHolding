@@ -3,6 +3,7 @@ package UI;
 import Clases.Sistema;
 import java.awt.Toolkit;
 import Clases.Encrypt;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -11,7 +12,7 @@ import Clases.Encrypt;
 public final class SignIn extends javax.swing.JFrame {
 
     Sistema sistema;
-    
+
     public SignIn(Sistema sistema) {
         initComponents();
         this.setTitle("Sport Holding Sign In");
@@ -121,16 +122,21 @@ public final class SignIn extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUserFocusGained
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        sistema.signIn(txtUser.getText(), Encrypt.encrypt(txtPassword1.getText()));
-        Login login = new Login();
-        login.run();
-        dispose();
+        if (txtPassword1.getText().equals(txtPassword2.getText())) {
+            sistema.signIn(txtUser.getText(), Encrypt.encrypt(txtPassword1.getText()));
+            Login login = new Login();
+            login.run();
+            dispose();
+        }else{
+         JOptionPane.showMessageDialog(null, "Passwords are not equal");
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtPassword2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassword2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPassword2ActionPerformed
-    
+
     public void setNimbusLookAndFeel() {
 
         try {

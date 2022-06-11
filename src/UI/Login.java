@@ -2,13 +2,16 @@ package UI;
 
 import java.awt.Toolkit;
 import Clases.Sistema;
+import Clases.Encrypt;
+
 /**
  *
  * @author maurh
  */
 public final class Login extends javax.swing.JFrame {
-    
+
     Sistema sistema = new Sistema();
+
     public Login() {
         initComponents();
         this.setTitle("Sport Holding Login");
@@ -120,11 +123,13 @@ public final class Login extends javax.swing.JFrame {
     private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
         System.out.println("User "+tFUsername.getText());
         System.out.println("password "+jPasswordField1.getText());
-        sistema.login(tFUsername.getText(),jPasswordField1.getText());
-        dispose();
-        Menu menu = new Menu();
-        menu.run();
-        
+        if (sistema.login(tFUsername.getText(), Encrypt.encrypt(jPasswordField1.getText()))) {
+            dispose();
+            Menu menu = new Menu();
+            menu.run();
+        }
+
+
     }//GEN-LAST:event_btnLogActionPerformed
 
     private void btnSignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignActionPerformed
@@ -137,10 +142,11 @@ public final class Login extends javax.swing.JFrame {
     private void tFUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tFUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tFUsernameActionPerformed
-    
-    public void run(){
-     new Login().setVisible(true);
+
+    public void run() {
+        new Login().setVisible(true);
     }
+
     public void setNimbusLookAndFeel() {
 
         try {
