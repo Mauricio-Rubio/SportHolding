@@ -1,6 +1,8 @@
 package Clases;
 import java.io.Serializable;
 
+import DB.DataBase;
+
 public class TP implements Serializable{
   private  Player[] players1 = new Player[16];
   private  Player[] players2 = new Player[8];
@@ -8,6 +10,7 @@ public class TP implements Serializable{
    private Player[] players4 = new Player[2];
    private Player[] players5 = new Player[0];
    private int round=1;
+   private boolean init=false;
 
     public TP(){
         for(int i=0; i<players1.length; i++){
@@ -83,9 +86,19 @@ public class TP implements Serializable{
     }
 
 public void playRound(){
+    if(init==false){
     mix(getArr(round));
+    }
+    init=true;
     int j=0;
-    for(int i=0; i< getArr(this.round).length; i+=2){
+    int k=0;
+    for(int x=0; x <getArr(round).length;x++){
+        if(getArr(round)[x].fought){
+            k=x;
+        }
+    }
+    
+    for(int i=k; i< getArr(this.round).length; i+=2){
         Camp.calculateP(getArr(round)[i], getArr(round)[i+1]);
         System.out.println(getArr(round)[i]+" vs "+ getArr(round)[i+1]);
         try{
@@ -94,12 +107,18 @@ public void playRound(){
             e.printStackTrace();
         }
         Player aux =Camp.winner(getArr(round)[i], getArr(round)[i]);
+
         System.out.println("Ganador: "+aux);
         getArr(round+1)[j] = aux;
+        getArr(round)[i].fought=true;
+         getArr(round)[i].fought=true;
+        DataBase.writeObj("Torn.txt", this);
         j++;
     }
 
     this.round++;
+    this.init=false;
+    DataBase.writeObj("Torn.txt", this);
 
 }
 

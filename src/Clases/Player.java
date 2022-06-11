@@ -7,6 +7,7 @@ public class Player implements Serializable{
     private String name;
     private int h;
     private float probability;
+    public boolean fought=false;
 
     public Player(){
         this.name= NameMaker.nameRamdom();

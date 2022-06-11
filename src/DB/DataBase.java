@@ -35,6 +35,10 @@ public static User searchUser(String fileName, String name, String password){
     int k=1;
     boolean finded=false;
     list =  readObj(fileName, list.getClass());
+    if(list==null){
+        return null;
+    }
+    readWrite(fileName, list.peek());
     if(list.isEmpty()){
         System.out.println("No hay jugadores registrados");
         return null;
@@ -47,6 +51,7 @@ public static User searchUser(String fileName, String name, String password){
             aux2 = (User) list.eliminarIndice(k);
             finded=true;
             writeObj(fileName, list);
+            System.out.println("encontrado");
             return aux2;
         }
         k++;
@@ -72,11 +77,15 @@ public static <T extends Serializable> void readWrite(String fileName, T obj){
     list.add(obj);
     System.out.println(list);
         writeObj(fileName, list);
-       // return obNew;
     }
-   // return null;
 }
     public static <T> T readObj(String fileName, Class<T> objClass) {
+        File f = new File(fileName);
+    
+        if(!f.exists()){
+            System.out.println("Este archivo no existe, debes registrar al menos un usuario");
+           return null;
+        }
         T obj = null;
         try(FileInputStream fis = new FileInputStream(fileName);
                 ObjectInputStream door = new ObjectInputStream(fis);){
