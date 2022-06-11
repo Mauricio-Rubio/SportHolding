@@ -43,7 +43,6 @@ public class User implements Serializable{
 
     public double getMount(){
         return this.mount;
-
     }
 
     public String getPassword() {

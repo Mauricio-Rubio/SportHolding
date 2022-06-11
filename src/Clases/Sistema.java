@@ -33,7 +33,7 @@ public class Sistema {
         return false;
         }else {
             System.out.println("registering");
-            DataBase.writeObj("Users.txt", aux);
+            DataBase.readWrite("Users.txt", aux);
             return true;
         }
     }

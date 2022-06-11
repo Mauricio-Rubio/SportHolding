@@ -20,6 +20,7 @@ public final class Login extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Sport Holding Login");
         this.closeWindow();
+        this.setVisible(true);
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
         //this.run();
     }
@@ -166,10 +167,6 @@ public final class Login extends javax.swing.JFrame {
     private void tFUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tFUsernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tFUsernameActionPerformed
-
-    public void run() {
-        new Login().setVisible(true);
-    }
 
     public void setNimbusLookAndFeel() {
 

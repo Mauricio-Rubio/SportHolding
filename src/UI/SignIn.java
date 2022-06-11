@@ -150,7 +150,6 @@ public final class SignIn extends javax.swing.JFrame {
         if (txtPassword1.getText().equals(txtPassword2.getText())) {
             if(sistema.signIn(txtUser.getText(), Encrypt.encrypt(txtPassword1.getText()))){
             Login login = new Login();
-            login.run();
             dispose();
             }else{
             JOptionPane.showMessageDialog(null, "Please enter another user");
