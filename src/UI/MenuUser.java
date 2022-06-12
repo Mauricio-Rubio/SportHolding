@@ -6,6 +6,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import Clases.Encrypt;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class MenuUser extends javax.swing.JFrame {
         this.setTitle("Sport Holding");
         this.closeWindow();
         this.sistema = sistema;
-        this.jLabelTitle.setText("Hello "+sistema.getActiveUser().getName());
+        this.jLabelTitle.setText("Hello " + sistema.getActiveUser().getName());
         this.setVisible(true);
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
         //this.run();
@@ -35,7 +36,6 @@ public final class MenuUser extends javax.swing.JFrame {
             addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent e) {
                     confirmClose();
-
                 }
             });
             this.setVisible(true);
@@ -45,7 +45,7 @@ public final class MenuUser extends javax.swing.JFrame {
     }
 
     public void confirmClose() {
-        int z = JOptionPane.showConfirmDialog(this, "Do you want to exit?", "Warning", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+        int z = JOptionPane.showConfirmDialog(this, "Do you want to exit?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (z == JOptionPane.YES_OPTION) {
             sistema.saveUser();
             System.out.println("Salvando sistema");
@@ -95,6 +95,11 @@ public final class MenuUser extends javax.swing.JFrame {
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Change Password");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 220, 40));
 
         jButton5.setBackground(new java.awt.Color(214, 169, 108));
@@ -168,6 +173,23 @@ public final class MenuUser extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String password = JOptionPane.showInputDialog("Enter your password");
+        if (sistema.getActiveUser().getPassword().equals(Encrypt.encrypt(password))) {
+            String password1 = Encrypt.encrypt(JOptionPane.showInputDialog("Enter your new password"));
+            String password2 = Encrypt.encrypt(JOptionPane.showInputDialog("Enter your new password"));
+            if (password1.equals(password2) && ! (password1.equals(sistema.getActiveUser().getPassword()))) {
+                sistema.changePassword(password1);
+            }else{
+                JOptionPane.showMessageDialog(null, "Your password is the same",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Your password is wrong",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /* public void run(){
      new Menu().setVisible(true);

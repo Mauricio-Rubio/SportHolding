@@ -9,8 +9,10 @@ import javax.swing.JOptionPane;
  */
 public class Sistema {
     private User activeUser;
+    
     public boolean login(String username, String password){
-        System.out.println("Contraseña que llega "+password);
+        DataBase.showDB("Users.txt");
+        System.out.println("Contraseña que llega login "+password);
         User aux = new User(username, password);
         User auxDB = DataBase.searchUser("Users.txt", username, password);
         //User auxDB = null;
@@ -27,9 +29,16 @@ public class Sistema {
         return activeUser;
     }
     
+    public boolean changePassword(String password){
+        DataBase.showDB("Users.txt");
+        this.activeUser.setPassword(password);
+        System.out.println("-->"+activeUser);
+        return true;
+    }
+    
     
     public boolean signIn(String username, String password){
-        System.out.println("Contraseña que llega "+password);
+        System.out.println("Contraseña que llega Sign In"+password);
         User aux = new User(username, password);
         User auxDB = DataBase.searchUser("Users.txt", username, password);
         if(auxDB != null){

@@ -29,7 +29,15 @@ public class DataBase {
         return sw;
     }
 
+    public static void showDB(String filename) {
+        Lista<User> list = new Lista();
+        list = readObj(filename, list.getClass());
+        System.out.println("list ->" + list);
+    }
+    
+    
     public static User searchUser(String fileName, String name, String password) {
+        System.out.println("DBP -> "+name+" "+password);
         Lista<User> list = new Lista();
         User aux2 = null;
         int k = 1;
@@ -38,7 +46,7 @@ public class DataBase {
         if (list == null) {
             return null;
         }
-        readWrite(fileName, list.peek());
+        System.out.println("list ->" + list);
         if (list.isEmpty()) {
             System.out.println("No hay jugadores registrados");
             return null;
@@ -47,7 +55,7 @@ public class DataBase {
         while (ite.hasNext() && finded == false) {
             finded = false;
             User aux = (User) ite.next();
-            if (name.equals(aux.getName()) && password.equals(password)) {
+            if (name.equals(aux.getName()) && password.equals(aux.getPassword())) {
                 aux2 = (User) list.eliminarIndice(k);
                 finded = true;
                 writeObj(fileName, list);

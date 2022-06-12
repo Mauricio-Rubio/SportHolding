@@ -3,6 +3,7 @@ package UI;
 import java.awt.Toolkit;
 import Clases.Sistema;
 import Clases.Encrypt;
+import DB.DataBase;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
@@ -17,6 +18,7 @@ public final class Login extends javax.swing.JFrame {
     Sistema sistema = new Sistema();
 
     public Login() {
+        DataBase.showDB("Users.txt");
         initComponents();
         this.setTitle("Sport Holding Login");
         this.closeWindow();
@@ -127,6 +129,7 @@ public final class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_tFUsernameFocusGained
 
     private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
+        
         System.out.println("User "+tFUsername.getText());
         System.out.println("password "+jPasswordField1.getText());
         if (sistema.login(tFUsername.getText(), Encrypt.encrypt(jPasswordField1.getText()))) {
