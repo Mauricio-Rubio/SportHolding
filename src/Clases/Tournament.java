@@ -8,7 +8,7 @@ import DB.DataBase;
  * @author Alcantara Estrada Kevin Isaac
  * @author Rubio Haro Mauricio
  */
-public class TP implements Serializable{
+public class Tournament implements Serializable{
     //Atributes of the class
   private  Player[] players1 = new Player[31];
    private int round=1;
@@ -20,7 +20,7 @@ public class TP implements Serializable{
    /**
     * Constructor of the class without parameters
     */
-    public TP(){
+    public Tournament(){
         for(int i=0; i<16; i++){
             players1[i]= new Player();
         }
@@ -32,7 +32,6 @@ public class TP implements Serializable{
  */
     public void printArr(){
             printRound1(this.players1);
-
     }
 
     /**
@@ -204,4 +203,46 @@ public void playRound(){
     public int getRound(){
         return this.round;
     }
+
+    public Player[] getPlayers1() {
+        return players1;
+    }
+
+    public void setPlayers1(Player[] players1) {
+        this.players1 = players1;
+    }
+
+    public boolean isInit() {
+        return init;
+    }
+
+    public void setInit(boolean init) {
+        this.init = init;
+    }
+
+    public int getPair() {
+        return pair;
+    }
+
+    public void setPair(int pair) {
+        this.pair = pair;
+    }
+
+    public int getPlay() {
+        return play;
+    }
+
+    public void setPlay(int play) {
+        this.play = play;
+    }
+
+    public int getPos() {
+        return pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
+    
+    
 }

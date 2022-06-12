@@ -1,5 +1,5 @@
 
-import Clases.TP;
+import Clases.Tournament;
 import Clases.User;
 
 import DB.DataBase;
