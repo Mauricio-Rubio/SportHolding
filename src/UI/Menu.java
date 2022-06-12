@@ -1,6 +1,11 @@
 package UI;
 
+import Clases.Sistema;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -8,14 +13,44 @@ import java.awt.Toolkit;
  */
 public final class Menu extends javax.swing.JFrame {
 
+    public Sistema sistema;
+
     /**
      * Creates new form Login
      */
-    public Menu() {
+    public Menu(Sistema sistema) {
         initComponents();
         this.setTitle("Sport Holding");
+        this.closeWindow();
+        this.sistema = sistema;
+        this.jLabelMount.setText("Money available "+String.valueOf(sistema.getActiveUser().getMount()));
+        this.setVisible(true);
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
         //this.run();
+    }
+
+    public void closeWindow() {
+        try {
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    confirmClose();
+
+                }
+            });
+            this.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void confirmClose() {
+        int z = JOptionPane.showConfirmDialog(this, "Do you want to exit?", "Warning", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+        if (z == JOptionPane.YES_OPTION) {
+            sistema.saveUser();
+            System.out.println("Salvando sistema");
+            System.exit(0);
+        }
     }
 
     /**
@@ -34,6 +69,7 @@ public final class Menu extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabelMount = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,6 +98,11 @@ public final class Menu extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(214, 169, 108));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setText("Consults");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 130, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -73,6 +114,10 @@ public final class Menu extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Box Tournament");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 120, 30));
+
+        jLabelMount.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelMount.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(jLabelMount, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 170, 30));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setForeground(new java.awt.Color(255, 102, 102));
@@ -97,10 +142,15 @@ public final class Menu extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-    
-    public void run(){
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        MenuUser menuUser = new MenuUser(sistema);
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    /* public void run(){
      new Menu().setVisible(true);
-    }
+    }*/
     public void setNimbusLookAndFeel() {
 
         try {
@@ -129,6 +179,7 @@ public final class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelMount;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 
