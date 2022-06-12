@@ -1,7 +1,7 @@
 
-import Clases.TP;
+import Clases.Tournament;
 import Clases.User;
-import Clases.Camp;
+import Clases.Operations;
 import Clases.HorseRace;
 import Clases.Jockey;
 import DB.DataBase;
@@ -23,16 +23,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("Iniciando");
-      HorseRace h = new HorseRace();
-      System.out.println(h.getJockeys());
-      h.playRace(h.getJockeys().peek());
-      //System.out.println(h.getJockeys());
-      /* System.out.printn(a.getHist());
-       a.calculateProbability(6);
-       System.out.println(a.getProbability());
-       System.out.println(Camp.betJockey(a));
-       System.out.println(Camp.betResult(a, 250));*/
+        HorseRace h = new HorseRace();
+        h.playRace(h.getJockeys().peek());
+       
        //Login login = new Login();
     }
 

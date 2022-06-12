@@ -87,7 +87,7 @@ public class User implements Serializable{
  * @return String
  */
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     /**

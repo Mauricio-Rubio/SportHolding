@@ -1,7 +1,7 @@
 package Clases;
 import Estructuras.*;
 import Clases.Jockey;
-
+import Clases.HorseRace;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Iterator;
@@ -10,7 +10,7 @@ import java.util.Iterator;
  * @author Alcantara Estrada Kevin Isaac
  * @author Rubio Haro Mauricio
  */
-public class Camp{
+public class Operations{
 
     /**
      * Method to calculate the probability of winning the combat of two players based on their skill
@@ -103,49 +103,82 @@ public class Camp{
    }
 
     /**
-     * Method that determine the winner of a combat between two competitors
-     * @param p1 First instance of the Player class
-     * @param p2 Second instance of the Player class
-     * @return Player
+     * Method that determine the winner of a combat between the competitors of the race
+     *@param h instance of the HorseRace class
+     *@return Lista<Jockey>
      */
     public static Lista<Jockey> jockeysPos(HorseRace h){
         int p=0;
         int rand=0;
-        Lista<Jockey> copy = h.getJockeys().clone();
+        Lista<Jockey> copy = h.getJockeys();//we copy the jockeys of the HorseRace instance
         Lista<Jockey> yaquisPos= new Lista();
         Iterator<Jockey> iteCopy = copy.iterator();
-        Jockey[] yaquis = new Jockey[h.getJockeys().size()];
+        Jockey[] yaquis = new Jockey[copy.size()];
         while(iteCopy.hasNext()){
             Jockey aux= iteCopy.next();
-            aux.calculateProbability(h.getJockeys.size());
-            yaquis[p]=aux;
+            aux.calculateProbability(h.getJockeys().size());//calculate the probability of winning
+            yaquis[p]=aux;//we inser each jockey in to the array
             p++;
         }
 
-        
        
-        float k = (float) Math.random();
+       
+       
         int ran = 0;
-        for (int i = 0; i <yaquis.length; i++) {
-          ran = (int) (Math.random() * (yaquis.length-1));
-          Jockye a = yaquis[i];
-          yaquis[i] = yaquis[ran];
-          yaquis[ran] = a;
-        }
+      
+int i=0;
+        int n = yaquis.length;  
+        Jockey temp = null;  
+         for(i=0; i < n; i++){  
+                 for(int j=1; j < (n-i); j++){  
+                          if(yaquis[j-1].getProbability() < yaquis[j].getProbability()){  //Use of the bubble sort algorithm to order the competitors according to their probability of winning
+                                 temp = yaquis[j-1];  
+                                 yaquis[j-1] = yaquis[j];  
+                                 yaquis[j] = temp;  
+                         }  
+                          
+                 } 
+                } 
+    
+       
 
+for ( i = 0; i <yaquis.length; i++) {
+    float k = (float) Math.random();
+        if(k<=yaquis[i].getProbability()){//We check if a jockey wins the race according to his probability of winning
+           // if he wins, he is placed at the top of the list and the rest of the jockeys are randomly distributed
+            Jockey winner= yaquis[i];
 
-for (int i = 0; i <yaquis.length; i++) {
-        if(k<=yaquis[i].getProbability()){
-            copy.delete(yaquis[i]);
-            while(iteCopy.hasNext()){
-                Jockey auxiliar= iteCopy.next();
-                yaquisPos.add(auxiliar);
+            for ( i = 0; i <yaquis.length; i++) {
+                ran = (int) (Math.random() * (yaquis.length-1));
+                Jockey a = yaquis[i];
+                yaquis[i] = yaquis[ran];
+                yaquis[ran] = a;
+              }
+
+            
+            for (Jockey e : yaquis) {
+            yaquisPos.add(e);
             }
-            yaquisPos.agregaInicio(yaquis[i]);
+            yaquisPos.delete(winner);
+            yaquisPos.agregaInicio(winner);
             return yaquisPos;
         }
   }
 
+
+  
+  //if neither jockey wins, the positions are given randomly
+            for ( i = 0; i <yaquis.length; i++) {
+                ran = (int) (Math.random() * (yaquis.length-1));
+                Jockey a = yaquis[i];
+                yaquis[i] = yaquis[ran];
+                yaquis[ran] = a;
+              }
+
+            
+            for (Jockey e : yaquis) {
+            yaquisPos.add(e);
+            }
   return yaquisPos;
     }
 }
