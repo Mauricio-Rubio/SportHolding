@@ -23,7 +23,7 @@ public final class Menu extends javax.swing.JFrame {
         this.setTitle("Sport Holding");
         this.closeWindow();
         this.sistema = sistema;
-        this.jLabelMount.setText("Money available "+String.valueOf(sistema.getActiveUser().getMount()));
+        this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
         this.setVisible(true);
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
         //this.run();
@@ -35,7 +35,6 @@ public final class Menu extends javax.swing.JFrame {
             addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent e) {
                     confirmClose();
-
                 }
             });
             this.setVisible(true);
@@ -45,11 +44,37 @@ public final class Menu extends javax.swing.JFrame {
     }
 
     public void confirmClose() {
-        int z = JOptionPane.showConfirmDialog(this, "Do you want to exit?", "Warning", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+        /* int z = JOptionPane.showConfirmDialog(this, "Do you want to exit?", "Warning", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
         if (z == JOptionPane.YES_OPTION) {
             sistema.saveUser();
             System.out.println("Salvando sistema");
             System.exit(0);
+        }*/
+        int seleccion = JOptionPane.showOptionDialog(
+                this,
+                "Do you want to exit?",
+                "Warning",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null, // null para icono por defecto.
+                new Object[]{"Exit", "Sign Out", "Cancel"}, // null para YES, NO y CANCEL
+                "opcion 1");
+
+        if (seleccion == 0) {
+            System.out.println("0");
+            sistema.saveUser();
+            System.out.println("Saving sistem");
+            System.exit(0);
+        }
+        if (seleccion == 1) {
+            System.out.println("1");
+            Login login = new Login();
+            sistema.saveUser();
+            System.out.println("Saving sistem");
+            dispose();
+        }
+        if (seleccion == 2) {
+            System.out.println("seleccionada opcion 2");
         }
     }
 
