@@ -17,7 +17,7 @@ public Jockey(String name){
     this.name= name;
 }
 
-public Lista<Integer> getHist(){
+public Lista<Jockey> getHist(){
     return this.hist;
 }
 

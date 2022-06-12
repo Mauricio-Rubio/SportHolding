@@ -112,12 +112,13 @@ public class Camp{
         int rand=0;
         j.calculateProbability(l.size());
         Jockey[] yaquis = new Jockey[l.size()];
-        Lista<Jockey> yaquisPos= new Lista();
+        Lista<Jockey> yaquisPos= l.clone();
         float prob = j.getProbability();
         float k = (float) Math.random();
-Iterator<T> ite = new l.iterador();
-while(ite.hasNext()){
-    yaquis[p]= ite.next;
+
+while(!yaquisPos.isEmpty()){
+    yaquis[p]= yaquisPos.peek();
+    yaquisPos.delete(yaquisPos.peek());
     p++;
 }
 
@@ -135,7 +136,7 @@ for (Jockey yaqui : yaquis) {
 yaquisPos.delete(j);
         if(k<=prob){
             System.out.println("Gano "+j);
-            yaquisPos.agregarInicio(j);
+            yaquisPos.agregaInicio(j);
             return yaquisPos;
         
         

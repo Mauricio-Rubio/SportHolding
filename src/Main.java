@@ -30,16 +30,17 @@ public class Main {
        Jockey e = new Jockey("Kevin");
        Jockey f = new Jockey("Jabba");
        Lista<Jockey> list = new Lista<Jockey>();
-       list.add(a);
+      list.add(a);
        list.add(b);
        list.add(c);
        list.add(d);
        list.add(e);
-       list.add(f);
+       list.add(f); 
 
        
 System.out.println(list);
-Camp.jockeysPos(f,list);
+System.out.println(Camp.jockeysPos(f,list));
+
 System.out.println(list);
       /* System.out.println(a.getHist());
        a.calculateProbability(6);
