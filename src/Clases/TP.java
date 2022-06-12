@@ -1,111 +1,207 @@
 package Clases;
 import java.io.Serializable;
 
-public class TP implements Serializable{
-  private  Player[] players1 = new Player[16];
-  private  Player[] players2 = new Player[8];
-   private Player[] players3 = new Player[4];
-   private Player[] players4 = new Player[2];
-   private Player[] players5 = new Player[0];
-   private int round=1;
+import DB.DataBase;
 
+/**
+ * Class that simulates a boxing tournament
+ * @author Alcantara Estrada Kevin Isaac
+ * @author Rubio Haro Mauricio
+ */
+public class TP implements Serializable{
+    //Atributes of the class
+  private  Player[] players1 = new Player[31];
+   private int round=1;
+   private boolean init=false;
+   private int pair=1;
+   private int play=0;
+   private int pos=0;
+
+   /**
+    * Constructor of the class without parameters
+    */
     public TP(){
-        for(int i=0; i<players1.length; i++){
+        for(int i=0; i<16; i++){
             players1[i]= new Player();
         }
     }
 
     
-
+/**
+ * Method to print the competitors of the tournament
+ */
     public void printArr(){
-        switch(round){
-            case 1:
-            print(this.players1);
-            break;
-
-            case 2:
-            print(this.players2);
-            break;
-
-            case 3:
-            print(this.players3);
-            break;
-
-            case 4:
-            print(this.players4);
-            break;
-
-            case 5:
-            print(this.players5);
-            break;
-        }
-
+            printRound1(this.players1);
 
     }
 
-    public void mix(Player[] players ) {
+    /**
+     * Method to print the competitors based on the value of the atribute round
+     */
+public void printCompetitors(){
+    switch (this.round){
+        case 1:
+        printRound1(this.players1);
+        break;
+
+        case 2:
+        printRound2(this.players1);
+        break;
+
+        case 3:
+        printRound3(this.players1);
+        break;
+
+        case 4:
+        printRound4(this.players1);
+        break;
+
+        case 5:
+        printWinner(this.players1);
+        break;
+    }
+}
+
+ /**
+     * Method to print the first round of competitors
+     * @param players
+     */
+    public void printRound1(Player[] players){
+        for(int i =0; i<16;i++){
+            System.out.print(players[i]+", ");
+        }
+        System.out.println();
+    }
+
+     /**
+     * Method to print the second round of competitors
+     * @param players
+     */
+    public void printRound2(Player[] players){
+        for(int i =16; i<24;i++){
+            System.out.print(players[i]+", ");
+        }
+        System.out.println();
+    }
+
+     /**
+     * Method to print the third round of competitors
+     * @param players
+     */
+    public void printRound3(Player[] players){
+        for(int i =24; i<28;i++){
+            System.out.print(players[i]+", ");
+        }
+        System.out.println();
+    }
+
+     /**
+     * Method to print the fourth round of competitors
+     * @param players
+     */
+    public void printRound4(Player[] players){
+        for(int i =28; i<30;i++){
+            System.out.println(players[i]);
+        }
+    }
+
+    /**
+     * Method to print the winner
+     * @param players
+     */
+    public void printWinner(Player[] players){
+            System.out.println("El ganador del torneo es: " +players[30]);
+    }
+
+    /**
+     * Method for shuffling tournament competitors
+     * @param players Array of Player class instances
+     */
+    public void mix(Player[] players) {
         int azar = 0;
-        for (int i = 0; i <players.length; i++) {
-          azar = (int) (Math.random() * (players.length - 1));
+        for (int i = 0; i <16; i++) {
+          azar = (int) (Math.random() * (16 -1));
           Player aux = players[i];
           players[i] = players[azar];
           players[azar] = aux;
         }
       }
 
-    public void print(Player[] players){
-        for(int i=0; i<players.length;i++){
-            System.out.print(players[i]+", ");
-        }
-    }
-    
-    public Player[] getArr(int i){
-        switch (i){
-            case 1:
-            return players1;
-
-            case 2:
-            return players2;
-
-            case 3:
-            return players3;
-
-            case 4:
-            return players4;
-
-            case 5:
-            return players5;
-
-            default:
-            return null;
-
-        }
-    }
-
+     
+  
+   /**
+    * Recursive method that starts a round and continues until it reaches the final round
+    */
+     
 public void playRound(){
-    mix(getArr(round));
-    int j=0;
-    for(int i=0; i< getArr(this.round).length; i+=2){
-        Camp.calculateP(getArr(round)[i], getArr(round)[i+1]);
-        System.out.println(getArr(round)[i]+" vs "+ getArr(round)[i+1]);
-        try{
-        Thread.sleep(10000);
+    printCompetitors();
+    if(round>=5){//base case
+        System.out.println("Se acabó el torneo");
+        return;
+
+    }
+
+    if(round==1 && init==false){
+    mix(players1);//shuffle the competitors
+    }
+  
+   
+    int h= 16/pair;
+    int j=32-h;
+    int p =j;
+
+    if(this.init){
+        j=pos;
+    }
+
+    int auxi=j;
+    if(init){
+        auxi=j-(j-p);
+    }
+
+    int u=j-h;
+    if(this.init){
+        u=play;
+    }
+   
+   this.init=true;
+
+    for(int i=u; i< auxi; i+=2){ //start the combats
+        Camp.calculateP(players1[i], players1[i+1]); //calculate probabilities
+        System.out.println(players1[i]+ " P:"+players1[i].getProbability() +" vs "+players1[i+1]+" p:"+ players1[i+1].getProbability()); //show info to the user
+
+         try{
+        Thread.sleep(70); //wait 7 seconds
         }catch(InterruptedException e){
             e.printStackTrace();
         }
-        Player aux =Camp.winner(getArr(round)[i], getArr(round)[i]);
-        System.out.println("Ganador: "+aux);
-        getArr(round+1)[j] = aux;
-        j++;
+        Player aux =Camp.winner(players1[i], players1[i+1]); //determinate the winner
+        players1[j] = aux; //the winner goes to the next round
+         play=i+2;
+         j++;
+          pos=j;
+        System.out.println("Ganador: "+aux); //show the winner to the user
+        DataBase.writeObj("Torn.txt", this); //serialize this tournament
+        
     }
 
-    this.round++;
-
+    
+    this.init=false;
+    pair=pair+pair;
+   System.out.println();
+   System.out.println("Acabo la ronda "+round);
+   this.round++; //increment the round number
+    DataBase.writeObj("Torn.txt", this); //serialize this tournament
+    playRound(); // recursive call
 }
+
+
+/**
+ * Method to get the round number of the tournament
+ * @return int
+ */
 
     public int getRound(){
         return this.round;
     }
-
-    
 }
