@@ -96,6 +96,11 @@ public final class Menu extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(214, 169, 108));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setText("Consults");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 130, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -131,6 +136,11 @@ public final class Menu extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        MenuUser menuUser = new MenuUser(sistema);
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /* public void run(){
      new Menu().setVisible(true);

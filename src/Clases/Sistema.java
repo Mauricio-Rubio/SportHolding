@@ -22,6 +22,10 @@ public class Sistema {
         }
         return true;
     }
+
+    public User getActiveUser() {
+        return activeUser;
+    }
     
     
     public boolean signIn(String username, String password){
