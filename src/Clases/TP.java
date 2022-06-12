@@ -5,10 +5,6 @@ import DB.DataBase;
 
 public class TP implements Serializable{
   private  Player[] players1 = new Player[31];
-  private  Player[] players2 = new Player[8];
-private Player[] players3 = new Player[4];
-  private Player[] players4 = new Player[2];
-  private Player[] players5 = new Player[1];
    private int round=1;
    private boolean init=false;
    private int pair=1;
@@ -24,11 +20,7 @@ private Player[] players3 = new Player[4];
     
 
     public void printArr(){
-       
             print(this.players1);
-    
-        
-
 
     }
 
@@ -49,28 +41,9 @@ private Player[] players3 = new Player[4];
         }
     }
     
-    public Player[] getArr(int i){
-        switch (i){
-            case 1:
-            return players1;
 
-            case 2:
-            return players2;
-
-            case 3:
-            return players3;
-
-            case 4:
-            return players4;
-
-            case 5:
-            return players5;
-
-            default:
-            return null;
-
-        }
-    }
+   
+    
 
 public void playRound(){
     if(round>=5){
@@ -111,11 +84,12 @@ public void playRound(){
         System.out.println("auxi"+auxi);
         Camp.calculateP(players1[i], players1[i+1]);
         System.out.println(players1[i]+ " P:"+players1[i].getProbability() +" vs "+players1[i+1]+" p:"+ players1[i+1].getProbability());
-       /*   try{
+
+         try{
         Thread.sleep(7000);
         }catch(InterruptedException e){
             e.printStackTrace();
-        }*/
+        }
         Player aux =Camp.winner(players1[i], players1[i+1]);
         players1[j] = aux;
        // players1[i].fought=true;
