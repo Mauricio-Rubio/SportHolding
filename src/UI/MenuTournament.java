@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -285,6 +286,11 @@ public final class MenuTournament extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 840, 250));
@@ -327,6 +333,12 @@ public final class MenuTournament extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int index = this.jTable1.getSelectedRow();
+        TableModel model = jTable1.getModel();
+        System.out.println("F1 "+model.getValueAt(index, 1) + "F2 "+model.getValueAt(index, 2) );
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /* public void run(){
      new Menu().setVisible(true);
