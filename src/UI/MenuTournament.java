@@ -76,16 +76,38 @@ public final class MenuTournament extends javax.swing.JFrame {
             model.addRow(row);
             x++;
         }
-        showSecondRound();
+        showNextRound(1);
     }
 
-    public void showSecondRound() {
+    public void showNextRound(int round) {
+        int i = 0;
+        int b = 0;
+        String a = "0";
+        switch (round) {
+            case 1:
+                i = 16;
+                b = 24;
+                a= "2";
+                break;
+            case 2:
+                i = 24;
+                b = 28;
+                a= "3";
+                break;
+            case 3:
+                i = 28;
+                b = 30;
+                a= "4";
+                break;
+            default:
+                throw new AssertionError();
+        }
         sistema.sleepThread(2000);
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         Player[] arr = sistema.getActiveTournament().getPlayers1();
         String[] row = new String[5];
-        for (int i = 16; i < 24; i += 2) {
-            row[0] = "2";
+        for (i = i; i < b; i += 2) {
+            row[0] = a;
             row[1] = arr[i].getName();
             row[2] = arr[i + 1].getName();
             Player favorite = sistema.favorite(arr[i], arr[i + 1]);
@@ -98,10 +120,10 @@ public final class MenuTournament extends javax.swing.JFrame {
 
     public void winner2() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.removeRow(12-1);
-        model.removeRow(12-2);
-        model.removeRow(12-3);
-        model.removeRow(12-4);
+        model.removeRow(12 - 1);
+        model.removeRow(12 - 2);
+        model.removeRow(12 - 3);
+        model.removeRow(12 - 4);
         Player[] arr = sistema.getActiveTournament().getPlayers1();
         String[] row = new String[6];
         int x = 24;
@@ -117,14 +139,16 @@ public final class MenuTournament extends javax.swing.JFrame {
             model.addRow(row);
             x++;
         }
-        showThirdRound();
+        showNextRound(2);
     }
-    
-        public void showThirdRound() {
-        sistema.sleepThread(2000);
+
+    public void winner3() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.removeRow(14 - 1);
+        model.removeRow(14 - 2);
         Player[] arr = sistema.getActiveTournament().getPlayers1();
-        String[] row = new String[5];
+        String[] row = new String[6];
+        int x = 28;
         for (int i = 24; i < 28; i += 2) {
             row[0] = "3";
             row[1] = arr[i].getName();
@@ -133,7 +157,30 @@ public final class MenuTournament extends javax.swing.JFrame {
             row[3] = favorite.getName();
             Player underDog = sistema.underdog(arr[i], arr[i + 1]);
             row[4] = underDog.getName();
+            row[5] = arr[x].getName();
             model.addRow(row);
+            x++;
+        }
+        showNextRound(3);
+    }
+
+    public void winner4() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.removeRow(15 - 1);
+        Player[] arr = sistema.getActiveTournament().getPlayers1();
+        String[] row = new String[6];
+        int x = 30;
+        for (int i = 28; i < 30; i += 2) {
+            row[0] = "4";
+            row[1] = arr[i].getName();
+            row[2] = arr[i + 1].getName();
+            Player favorite = sistema.favorite(arr[i], arr[i + 1]);
+            row[3] = favorite.getName();
+            Player underDog = sistema.underdog(arr[i], arr[i + 1]);
+            row[4] = underDog.getName();
+            row[5] = arr[x].getName();
+            model.addRow(row);
+            x++;
         }
     }
 
@@ -152,12 +199,6 @@ public final class MenuTournament extends javax.swing.JFrame {
     }
 
     public void confirmClose() {
-        /* int z = JOptionPane.showConfirmDialog(this, "Do you want to exit?", "Warning", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
-        if (z == JOptionPane.YES_OPTION) {
-            sistema.saveUser();
-            System.out.println("Salvando sistema");
-            System.exit(0);
-        }*/
         int seleccion = JOptionPane.showOptionDialog(
                 this,
                 "Do you want to exit?",
@@ -278,6 +319,11 @@ public final class MenuTournament extends javax.swing.JFrame {
         } else if (optionStart == 1) {
             this.winner2();
             optionStart++;
+        } else if (optionStart == 2) {
+            this.winner3();
+            optionStart++;
+        } else {
+            this.winner4();
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
