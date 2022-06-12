@@ -1,7 +1,10 @@
 package Clases;
+import Estructuras.*;
+import Clases.Jockey;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-/**
+import java.util.Iterator;
+/** 
  * Class to do mathematical operations and some probability calculations
  * @author Alcantara Estrada Kevin Isaac
  * @author Rubio Haro Mauricio
@@ -62,6 +65,8 @@ public class Camp{
         return bp;
     }
 
+
+
     /**
      * Method to calculate the profits of your bet
      * @param p Competitor you bet on
@@ -71,5 +76,74 @@ public class Camp{
     public static float betResult(Player p, float bet){
          float r= (float) bet* betProbability(p);
                   return r;
+    }
+
+    /**
+     * Method to calculate the percentage of profit when betting on a jockey
+     * @param j Jockey you want to bet on
+     * @return float
+     */
+    public static float betJockey(Jockey j){
+        float bj = 1/j.getProbability() ;
+        BigDecimal bd = new BigDecimal(bj).setScale(2, RoundingMode.HALF_UP);
+        bj = bd.floatValue();
+        return bj;
+    }
+
+     /**
+     * Method to calculate the profits of your bet
+     * @param j Jockey you bet on
+     * @param bet The amount of your bet
+     * @return float
+     */
+    public static float betResult(Jockey j, float bet){
+        float r= (float) bet* betJockey(j);
+                 return r;
+   }
+
+    /**
+     * Method that determine the winner of a combat between two competitors
+     * @param p1 First instance of the Player class
+     * @param p2 Second instance of the Player class
+     * @return Player
+     */
+    public static Lista<Jockey> jockeysPos(Jockey j, Lista<Jockey> l){
+        int p=0;
+        int rand=0;
+        j.calculateProbability(l.size());
+        Jockey[] yaquis = new Jockey[l.size()];
+        Lista<Jockey> yaquisPos= new Lista();
+        float prob = j.getProbability();
+        float k = (float) Math.random();
+Iterator<T> ite = new l.iterador();
+while(ite.hasNext()){
+    yaquis[p]= ite.next;
+    p++;
+}
+
+for (int i = 0; i <yaquis.length; i++) {
+    rand = (int) (Math.random() * (yaquis.length-1));
+    Jockey aux = yaquis[i];
+    yaquis[i] = yaquis[rand];
+    yaquis[rand] = aux;
+  }
+
+for (Jockey yaqui : yaquis) {
+    yaquisPos.add(yaqui);  
+}
+
+yaquisPos.delete(j);
+        if(k<=prob){
+            System.out.println("Gano "+j);
+            yaquisPos.agregarInicio(j);
+            return yaquisPos;
+        
+        
+        }else{
+            System.out.println("Perdio "+j);
+          int ins = (int) (Math.random() * (yaquis.length-1)+1);
+            yaquisPos.insert(ins, j);
+            return yaquisPos;
+        }
     }
 }
