@@ -1,6 +1,7 @@
 package Clases;
 import Estructuras.*;
 import Clases.Jockey;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Iterator;
@@ -107,44 +108,44 @@ public class Camp{
      * @param p2 Second instance of the Player class
      * @return Player
      */
-    public static Lista<Jockey> jockeysPos(Jockey j, Lista<Jockey> l){
+    public static Lista<Jockey> jockeysPos(HorseRace h){
         int p=0;
         int rand=0;
-        j.calculateProbability(l.size());
-        Jockey[] yaquis = new Jockey[l.size()];
-        Lista<Jockey> yaquisPos= l.clone();
-        float prob = j.getProbability();
-        float k = (float) Math.random();
+        Lista<Jockey> copy = h.getJockeys().clone();
+        Lista<Jockey> yaquisPos= new Lista();
+        Iterator<Jockey> iteCopy = copy.iterator();
+        Jockey[] yaquis = new Jockey[h.getJockeys().size()];
+        while(iteCopy.hasNext()){
+            Jockey aux= iteCopy.next();
+            aux.calculateProbability(h.getJockeys.size());
+            yaquis[p]=aux;
+            p++;
+        }
 
-while(!yaquisPos.isEmpty()){
-    yaquis[p]= yaquisPos.peek();
-    yaquisPos.delete(yaquisPos.peek());
-    p++;
-}
+        
+       
+        float k = (float) Math.random();
+        int ran = 0;
+        for (int i = 0; i <yaquis.length; i++) {
+          ran = (int) (Math.random() * (yaquis.length-1));
+          Jockye a = yaquis[i];
+          yaquis[i] = yaquis[ran];
+          yaquis[ran] = a;
+        }
+
 
 for (int i = 0; i <yaquis.length; i++) {
-    rand = (int) (Math.random() * (yaquis.length-1));
-    Jockey aux = yaquis[i];
-    yaquis[i] = yaquis[rand];
-    yaquis[rand] = aux;
-  }
-
-for (Jockey yaqui : yaquis) {
-    yaquisPos.add(yaqui);  
-}
-
-yaquisPos.delete(j);
-        if(k<=prob){
-            System.out.println("Gano "+j);
-            yaquisPos.agregaInicio(j);
-            return yaquisPos;
-        
-        
-        }else{
-            System.out.println("Perdio "+j);
-          int ins = (int) (Math.random() * (yaquis.length-1)+1);
-            yaquisPos.insert(ins, j);
+        if(k<=yaquis[i].getProbability()){
+            copy.delete(yaquis[i]);
+            while(iteCopy.hasNext()){
+                Jockey auxiliar= iteCopy.next();
+                yaquisPos.add(auxiliar);
+            }
+            yaquisPos.agregaInicio(yaquis[i]);
             return yaquisPos;
         }
+  }
+
+  return yaquisPos;
     }
 }

@@ -17,7 +17,7 @@ public Jockey(String name){
     this.name= name;
 }
 
-public Lista<Jockey> getHist(){
+public Lista<Integer> getHist(){
     return this.hist;
 }
 
@@ -63,7 +63,7 @@ setProbability(pw);
 }
 
 public String toString(){
-    return this.name;
+    return this.name +" Probability: "+this.probability+"%\n"+this.hist;
 }
 
 }
