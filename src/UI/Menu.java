@@ -23,6 +23,7 @@ public final class Menu extends javax.swing.JFrame {
         this.setTitle("Sport Holding");
         this.closeWindow();
         this.sistema = sistema;
+        this.jLabelMount.setText("Money available "+String.valueOf(sistema.getActiveUser().getMount()));
         this.setVisible(true);
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
         //this.run();
@@ -68,6 +69,7 @@ public final class Menu extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabelMount = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -112,6 +114,10 @@ public final class Menu extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Box Tournament");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 120, 30));
+
+        jLabelMount.setBackground(new java.awt.Color(0, 0, 0));
+        jLabelMount.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(jLabelMount, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 170, 30));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setForeground(new java.awt.Color(255, 102, 102));
@@ -173,6 +179,7 @@ public final class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelMount;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 

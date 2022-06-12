@@ -36,6 +36,13 @@ public class Sistema {
         return true;
     }
     
+    public void deposit(Double mount){
+        this.activeUser.setMount(mount);
+    }
+    
+    public void withdrawal(Double mount){
+        this.activeUser.setMount(activeUser.getMount() - mount);
+    }
     
     public boolean signIn(String username, String password){
         System.out.println("Contraseña que llega Sign In"+password);

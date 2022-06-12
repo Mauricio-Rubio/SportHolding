@@ -163,11 +163,35 @@ public final class MenuUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        try {
+            double mount = Double.parseDouble(JOptionPane.showInputDialog(null, "Enter a mount equal or more than 50",
+                    "Green dinner", JOptionPane.INFORMATION_MESSAGE));
+            if (mount < 50) {
+                throw new Exception();
+            }
+            sistema.deposit(mount);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid option",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+           try {
+            double mount = Double.parseDouble(JOptionPane.showInputDialog(null, "Enter a mount, you have "+sistema.getActiveUser().getMount()+ " available for withdrawal",
+                    "Green dinner", JOptionPane.INFORMATION_MESSAGE));
+            if (mount <= sistema.getActiveUser().getMount() && mount >= 50) {
+            sistema.withdrawal(mount);
+            }else{
+                throw new Exception();
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid option",
+                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -175,20 +199,25 @@ public final class MenuUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        String password = JOptionPane.showInputDialog("Enter your password");
-        if (sistema.getActiveUser().getPassword().equals(Encrypt.encrypt(password))) {
-            String password1 = Encrypt.encrypt(JOptionPane.showInputDialog("Enter your new password"));
-            String password2 = Encrypt.encrypt(JOptionPane.showInputDialog("Enter your new password"));
-            if (password1.equals(password2) && ! (password1.equals(sistema.getActiveUser().getPassword()))) {
-                sistema.changePassword(password1);
-            }else{
-                JOptionPane.showMessageDialog(null, "Your password is the same",
-                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+        try {
+            String password = JOptionPane.showInputDialog("Enter your password");
+            if (sistema.getActiveUser().getPassword().equals(Encrypt.encrypt(password))) {
+                String password1 = Encrypt.encrypt(JOptionPane.showInputDialog("Enter your new password"));
+                String password2 = Encrypt.encrypt(JOptionPane.showInputDialog("Enter your new password"));
+                if (password1.equals(password2) && !(password1.equals(sistema.getActiveUser().getPassword()))) {
+                    sistema.changePassword(password1);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Your password is the same",
+                            "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Your password is wrong",
+                        "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Your password is wrong",
-                    "ERROR_MESSAGE", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            System.out.println("ERROR");
         }
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /* public void run(){
