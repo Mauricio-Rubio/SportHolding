@@ -8,6 +8,9 @@ public class Player implements Serializable{
     private int h;
     private float probability;
 
+    public boolean fought=false;
+
+
     public Player(){
         this.name= NameMaker.nameRamdom();
         this.h= (int) (Math.random()*(400-50)) + 50;

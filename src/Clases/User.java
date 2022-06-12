@@ -43,7 +43,9 @@ public class User implements Serializable{
 
     public double getMount(){
         return this.mount;
+
     }
+
 
     public String getPassword() {
         return password;
@@ -52,6 +54,7 @@ public class User implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     @Override 
     public String toString(){

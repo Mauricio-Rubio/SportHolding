@@ -21,6 +21,7 @@ public class TP implements Serializable{
 
     public void printArr(){
             print(this.players1);
+
     }
 
     public void mix(Player[] players ) {
@@ -40,6 +41,7 @@ public class TP implements Serializable{
         }
     }
     
+
    
     
 
@@ -82,6 +84,7 @@ public void playRound(){
         System.out.println("auxi"+auxi);
         Camp.calculateP(players1[i], players1[i+1]);
         System.out.println(players1[i]+ " P:"+players1[i].getProbability() +" vs "+players1[i+1]+" p:"+ players1[i+1].getProbability());
+
          try{
         Thread.sleep(7000);
         }catch(InterruptedException e){

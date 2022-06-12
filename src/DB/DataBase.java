@@ -29,6 +29,7 @@ public class DataBase {
         return sw;
     }
 
+
     public static void showDB(String filename) {
         Lista<User> list = new Lista();
         list = readObj(filename, list.getClass());
@@ -95,6 +96,7 @@ public class DataBase {
         if (!f.exists()) {
             System.out.println("Este archivo no existe, debes registrar al menos un usuario");
             return null;
+
         }
         T obj = null;
         try ( FileInputStream fis = new FileInputStream(fileName);  ObjectInputStream door = new ObjectInputStream(fis);) {
