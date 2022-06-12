@@ -15,14 +15,26 @@ import javax.swing.JOptionPane;
  */
 public final class Bet extends javax.swing.JFrame {
 
-    Sistema sistema = new Sistema();
+    Sistema sistema;
 
-    public Bet() {
+    public Bet(Sistema sistema, int index) {
         DataBase.showDB("Users.txt");
         initComponents();
         this.setTitle("Sport Holding Login");
         this.closeWindow();
         this.setVisible(true);
+        this.sistema = sistema;
+        sistema.getActiveTournament().printArr();
+        if (index % 2 == 0) {
+            index = index * 2;
+            jP1.setText(sistema.getActiveTournament().getPlayers1()[index].getName());
+            jP2.setText(sistema.getActiveTournament().getPlayers1()[index + 1].getName());
+        } else {
+            index = index * 2;
+            jP1.setText(sistema.getActiveTournament().getPlayers1()[index].getName());
+            jP2.setText(sistema.getActiveTournament().getPlayers1()[index + 1].getName());
+        }
+
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
         //this.run();
     }
@@ -38,12 +50,11 @@ public final class Bet extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        tFUsername = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jP1 = new javax.swing.JLabel();
         btnLog = new javax.swing.JButton();
         btnSign = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jP2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,35 +65,12 @@ public final class Bet extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Bet");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 50, 38));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 50, 38));
 
-        tFUsername.setBackground(new java.awt.Color(204, 204, 204));
-        tFUsername.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tFUsername.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                tFUsernameFocusGained(evt);
-            }
-        });
-        tFUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tFUsernameActionPerformed(evt);
-            }
-        });
-        jPanel1.add(tFUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 116, 246, 35));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Username");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 94, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Password");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 185, -1, -1));
-
-        jPasswordField1.setBackground(new java.awt.Color(204, 204, 204));
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 219, 246, 38));
+        jP1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jP1.setForeground(new java.awt.Color(255, 255, 255));
+        jP1.setText("1");
+        jPanel1.add(jP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 200, 30));
 
         btnLog.setBackground(new java.awt.Color(214, 169, 92));
         btnLog.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -106,6 +94,16 @@ public final class Bet extends javax.swing.JFrame {
         });
         jPanel1.add(btnSign, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 293, -1, 35));
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("vs");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 200, 30));
+
+        jP2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jP2.setForeground(new java.awt.Color(255, 255, 255));
+        jP2.setText("1");
+        jPanel1.add(jP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 200, 30));
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Fondo.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 337, 350));
 
@@ -124,27 +122,16 @@ public final class Bet extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tFUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tFUsernameFocusGained
-        this.tFUsername.setText("");
-    }//GEN-LAST:event_tFUsernameFocusGained
-
     private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
-        
-        System.out.println("User "+tFUsername.getText());
-        System.out.println("password "+jPasswordField1.getText());
-        if (sistema.login(tFUsername.getText(), Encrypt.encrypt(jPasswordField1.getText()))) {
-            dispose();
-            Menu menu = new Menu(sistema);
-        }
 
 
     }//GEN-LAST:event_btnLogActionPerformed
 
-    public void closeWindow(){
+    public void closeWindow() {
         try {
             this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-            addWindowListener(new WindowAdapter(){
-                public void windowClosing(WindowEvent e){
+            addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
                     confirmClose();
                 }
             });
@@ -153,23 +140,23 @@ public final class Bet extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-    public void confirmClose(){
-        int z = JOptionPane.showConfirmDialog(this, "Do you want to exit?", "Warning", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
-        if(z == JOptionPane.YES_OPTION){
-            System.exit(0);
+
+    public void confirmClose() {
+        int z = JOptionPane.showConfirmDialog(this, "Do you want to exit?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if (z == JOptionPane.YES_OPTION) {
+            this.dispose();
+            //sistema.saveUser();
+            //System.out.println("Saving sistem");
         }
     }
-    
+
     private void btnSignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignActionPerformed
         dispose();
         SignIn signin = new SignIn(sistema);
         //signin.run();
         //this.setVisible(false);
     }//GEN-LAST:event_btnSignActionPerformed
-
-    private void tFUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tFUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tFUsernameActionPerformed
 
     public void setNimbusLookAndFeel() {
 
@@ -196,11 +183,10 @@ public final class Bet extends javax.swing.JFrame {
     private javax.swing.JButton btnSign;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jP1;
+    private javax.swing.JLabel jP2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField tFUsername;
     // End of variables declaration//GEN-END:variables
 
 }

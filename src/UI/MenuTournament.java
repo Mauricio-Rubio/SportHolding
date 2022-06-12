@@ -338,6 +338,8 @@ public final class MenuTournament extends javax.swing.JFrame {
         int index = this.jTable1.getSelectedRow();
         TableModel model = jTable1.getModel();
         System.out.println("F1 "+model.getValueAt(index, 1) + "F2 "+model.getValueAt(index, 2) );
+        System.out.println("Index --->"+index);
+        Bet bet = new Bet(sistema, index);
     }//GEN-LAST:event_jTable1MouseClicked
 
     /* public void run(){
