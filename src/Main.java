@@ -21,28 +21,28 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("Iniciando");
-       Login login = new Login();
-       login.run();
-       DataBase.searchUser("Hist.txt", "Ulises", "0000");
+       //Login login = new Login();
+      // login.run();
+      // DataBase.searchUser("Hist.txt", "Ulises", "0000");
        /*  System.out.println("Prueba");
         Lista<User> list = new Lista();
         Player a = new Player();
         Player b= new Player();*/
 
-       /*TP t = new TP();
+       TP t = new TP();
        t= DataBase.readObj("Torn.txt", t.getClass());
        if(t==null){
            t = new TP();
        }
 
-       t.printArr();
+      // t.printArr();
       // 
        //TP c = DataBase.readObj("Torn.txt", t.getClass());
        System.out.println();
       // c.printArr();
       t.printArr();
-      t.playRound();
-      t.playRound();
+      
+      System.out.println();
       t.playRound();
 
 

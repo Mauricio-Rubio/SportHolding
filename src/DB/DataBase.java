@@ -38,7 +38,7 @@ public static User searchUser(String fileName, String name, String password){
     if(list==null){
         return null;
     }
-    readWrite(fileName, list.peek());
+
     if(list.isEmpty()){
         System.out.println("No hay jugadores registrados");
         return null;
@@ -47,7 +47,7 @@ public static User searchUser(String fileName, String name, String password){
     while(ite.hasNext()&& finded==false){
         finded=false;
        User aux=(User) ite.next();
-        if(name.equals(aux.getName()) && password.equals(password)){
+        if(name.equals(aux.getName()) && password.equals(aux.getId())){
             aux2 = (User) list.eliminarIndice(k);
             finded=true;
             writeObj(fileName, list);

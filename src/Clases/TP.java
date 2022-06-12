@@ -4,16 +4,19 @@ import java.io.Serializable;
 import DB.DataBase;
 
 public class TP implements Serializable{
-  private  Player[] players1 = new Player[16];
+  private  Player[] players1 = new Player[31];
   private  Player[] players2 = new Player[8];
-   private Player[] players3 = new Player[4];
-   private Player[] players4 = new Player[2];
-   private Player[] players5 = new Player[0];
+private Player[] players3 = new Player[4];
+  private Player[] players4 = new Player[2];
+  private Player[] players5 = new Player[1];
    private int round=1;
    private boolean init=false;
+   private int pair=1;
+   private int play=0;
+   private int pos=0;
 
     public TP(){
-        for(int i=0; i<players1.length; i++){
+        for(int i=0; i<16; i++){
             players1[i]= new Player();
         }
     }
@@ -21,35 +24,18 @@ public class TP implements Serializable{
     
 
     public void printArr(){
-        switch(round){
-            case 1:
+       
             print(this.players1);
-            break;
-
-            case 2:
-            print(this.players2);
-            break;
-
-            case 3:
-            print(this.players3);
-            break;
-
-            case 4:
-            print(this.players4);
-            break;
-
-            case 5:
-            print(this.players5);
-            break;
-        }
+    
+        
 
 
     }
 
     public void mix(Player[] players ) {
         int azar = 0;
-        for (int i = 0; i <players.length; i++) {
-          azar = (int) (Math.random() * (players.length - 1));
+        for (int i = 0; i <16; i++) {
+          azar = (int) (Math.random() * (16 - 1));
           Player aux = players[i];
           players[i] = players[azar];
           players[azar] = aux;
@@ -57,7 +43,8 @@ public class TP implements Serializable{
       }
 
     public void print(Player[] players){
-        for(int i=0; i<players.length;i++){
+        int h= 16/this.round;
+        for(int i=0; i<h;i++){
             System.out.print(players[i]+", ");
         }
     }
@@ -86,40 +73,69 @@ public class TP implements Serializable{
     }
 
 public void playRound(){
-    if(init==false){
-    mix(getArr(round));
+    if(round>=5){
+        System.out.println("Se acabó el torneo");
+        return;
+
     }
-    init=true;
-    int j=0;
-    int k=0;
-    for(int x=0; x <getArr(round).length;x++){
-        if(getArr(round)[x].fought){
-            k=x;
-        }
+
+    if(this.init==false){
+    mix(players1);
     }
+  
+   
+    int h= 16/pair;
+   
     
-    for(int i=k; i< getArr(this.round).length; i+=2){
-        Camp.calculateP(getArr(round)[i], getArr(round)[i+1]);
-        System.out.println(getArr(round)[i]+" vs "+ getArr(round)[i+1]);
-        try{
-        Thread.sleep(10000);
+    int j=32-h;
+    int p =j;
+    if(this.init){
+        j=pos;
+    }
+    int auxi=j;
+    if(init){
+        auxi=j-(j-p);
+    }
+   // int k=0;
+    int u=j-h;
+    if(this.init){
+        u=play;
+    }
+   
+   this.init=true;
+
+    for(int i=u; i< auxi; i+=2){
+        System.out.println("u"+u);
+        System.out.println("j"+j);
+        System.out.println("i"+i);
+        System.out.println("auxi"+auxi);
+        Camp.calculateP(players1[i], players1[i+1]);
+        System.out.println(players1[i]+ " P:"+players1[i].getProbability() +" vs "+players1[i+1]+" p:"+ players1[i+1].getProbability());
+       /*   try{
+        Thread.sleep(7000);
         }catch(InterruptedException e){
             e.printStackTrace();
-        }
-        Player aux =Camp.winner(getArr(round)[i], getArr(round)[i]);
-
+        }*/
+        Player aux =Camp.winner(players1[i], players1[i+1]);
+        players1[j] = aux;
+       // players1[i].fought=true;
+        // players1[i+1].fought=true;
+         play=i+2;
+         j++;
+          pos=j;
         System.out.println("Ganador: "+aux);
-        getArr(round+1)[j] = aux;
-        getArr(round)[i].fought=true;
-         getArr(round)[i].fought=true;
         DataBase.writeObj("Torn.txt", this);
-        j++;
+        
     }
 
-    this.round++;
+    
     this.init=false;
+    pair=pair+pair;
+   System.out.println();
+   System.out.println("Acabo la ronda "+round);
+   this.round++;
     DataBase.writeObj("Torn.txt", this);
-
+    playRound();
 }
 
     public int getRound(){
