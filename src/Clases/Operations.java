@@ -6,7 +6,7 @@ import java.math.RoundingMode;
  * @author Alcantara Estrada Kevin Isaac
  * @author Rubio Haro Mauricio
  */
-public class Camp{
+public class Operations{
 
     /**
      * Method to calculate the probability of winning the combat of two players based on their skill

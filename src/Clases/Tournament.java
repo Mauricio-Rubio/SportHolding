@@ -166,7 +166,7 @@ public void playRound(){
    this.init=true;
 
     for(int i=u; i< auxi; i+=2){ //start the combats
-        Camp.calculateP(players1[i], players1[i+1]); //calculate probabilities
+        Operations.calculateP(players1[i], players1[i+1]); //calculate probabilities
         System.out.println(players1[i]+ " P:"+players1[i].getProbability() +" vs "+players1[i+1]+" p:"+ players1[i+1].getProbability()); //show info to the user
 
          try{
@@ -174,7 +174,7 @@ public void playRound(){
         }catch(InterruptedException e){
             e.printStackTrace();
         }
-        Player aux =Camp.winner(players1[i], players1[i+1]); //determinate the winner
+        Player aux =Operations.winner(players1[i], players1[i+1]); //determinate the winner
         players1[j] = aux; //the winner goes to the next round
          play=i+2;
          j++;
