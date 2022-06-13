@@ -19,6 +19,7 @@ public class User implements Serializable{
     private Lista<Double> deposits = new Lista<Double>();
     private Lista<String> BetsLoses = new Lista<String>();
     private Lista<String> BetsWon = new Lista<String>();
+    private int lastRoundSeen = -1;
 
     /**
      * COnstructor of the class
@@ -62,6 +63,14 @@ public class User implements Serializable{
 
     public Lista<String> getBetsLoses() {
         return BetsLoses;
+    }
+
+    public int getLastRoundSeen() {
+        return lastRoundSeen;
+    }
+
+    public void setLastRoundSeen(int lastRoundSeen) {
+        this.lastRoundSeen = lastRoundSeen;
     }
 
     public void setBetsLoses(Lista<String> BetsLoses) {
