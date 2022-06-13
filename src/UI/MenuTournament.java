@@ -33,8 +33,6 @@ public final class MenuTournament extends javax.swing.JFrame {
         this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
         this.setVisible(true);
         //initTable();
-        
-        //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
     }
 
     private void initTable(Player[] arr) {
@@ -327,10 +325,10 @@ public final class MenuTournament extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        initTable(this.sistema.chargeTournament());
         Pila<String> aux = sistema.getBetNames();
         Pila<String> aux2 = sistema.getBetProfits();
         if(optionStart == -1){
+        initTable(this.sistema.chargeTournament());
         optionStart++;
         }else if (optionStart == 0) {
             this.winner1();
