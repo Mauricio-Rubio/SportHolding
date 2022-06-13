@@ -32,6 +32,7 @@ public class Tournament implements Serializable{
  */
     public void printArr(){
             printRound1(this.players1);
+
     }
 
     /**
@@ -194,16 +195,6 @@ public void playRound(){
     playRound(); // recursive call
 }
 
-
-/**
- * Method to get the round number of the tournament
- * @return int
- */
-
-    public int getRound(){
-        return this.round;
-    }
-
     public Player[] getPlayers1() {
         return players1;
     }
@@ -243,6 +234,14 @@ public void playRound(){
     public void setPos(int pos) {
         this.pos = pos;
     }
-    
-    
+
+
+/**
+ * Method to get the round number of the tournament
+ * @return int
+ */
+
+    public int getRound(){
+        return this.round;
+    }
 }

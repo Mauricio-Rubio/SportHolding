@@ -3,7 +3,7 @@ import Clases.Tournament;
 import Clases.User;
 
 import DB.DataBase;
-import Estructuras.Lista;
+import Estructuras.*;
 import UI.Login;
 
 
