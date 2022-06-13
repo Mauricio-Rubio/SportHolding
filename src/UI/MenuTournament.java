@@ -170,6 +170,7 @@ public final class MenuTournament extends javax.swing.JFrame {
         Player[] arr = sistema.getActiveTournament().getPlayers1();
         String[] row = new String[6];
         int x = 30;
+        this.sistema.sleepThread(1200);
         for (int i = 28; i < 30; i += 2) {
             row[0] = "4";
             row[1] = arr[i].getName();
@@ -339,8 +340,15 @@ public final class MenuTournament extends javax.swing.JFrame {
         } else if (optionStart == 2) {
             this.winner3();
             optionStart++;
-        } else {
+        } else if(optionStart == 3){
             this.winner4();
+            optionStart++;
+        }
+        if(optionStart>=4){
+        JOptionPane.showMessageDialog(
+                this,
+                "The tournament has been ended ");
+        sistema.setActiveTournament(null);
         }
         this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
         System.out.println("Pilas lenght -->" + aux.size());
