@@ -50,15 +50,16 @@ public class Sistema {
     }
 
     public void deposit(Double mount) {
-        this.activeUser.setMount(activeUser.getMount() + mount);
+        this.activeUser.deposit(mount);
     }
 
     public void withdrawal(Double mount) {
-        this.activeUser.setMount(activeUser.getMount() - mount);
+        this.activeUser.withdrawal(mount);
     }
 
-    public void bet(Double mount) {
-        this.activeUser.setMount(activeUser.getMount() - mount);
+    public void bet(Double mount,boolean bool ,String guyBet) {
+        System.out.println("Guardando al imbecil sistem"+guyBet);
+        this.activeUser.bet(mount, bool, guyBet);
     }
 
     public boolean signIn(String username, String password) {

@@ -106,7 +106,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jtimer">
+        <Component class="javax.swing.JLabel" name="jLabelMount">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel3"/>
           </Properties>

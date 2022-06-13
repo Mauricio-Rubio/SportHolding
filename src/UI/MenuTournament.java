@@ -29,7 +29,7 @@ public final class MenuTournament extends javax.swing.JFrame {
         this.setTitle("Sport Holding");
         this.closeWindow();
         this.sistema = sistema;
-        //this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
+        this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
         this.setVisible(true);
         //initTable();
         initTable(this.sistema.chargeTournament());
@@ -242,7 +242,7 @@ public final class MenuTournament extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jtimer = new javax.swing.JLabel();
+        jLabelMount = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -290,8 +290,8 @@ public final class MenuTournament extends javax.swing.JFrame {
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 840, 250));
 
-        jtimer.setText("jLabel3");
-        jPanel2.add(jtimer, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 290, 40));
+        jLabelMount.setText("jLabel3");
+        jPanel2.add(jLabelMount, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 290, 40));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setForeground(new java.awt.Color(255, 102, 102));
@@ -332,9 +332,13 @@ public final class MenuTournament extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int index = this.jTable1.getSelectedRow();
         TableModel model = jTable1.getModel();
-        if(model.getValueAt(index, 5) == null){menuBet bet = new menuBet(sistema, index);}
-        //System.out.println("F1 "+model.getValueAt(index, 5));
-        //
+        if(model.getValueAt(index, 5) == null){
+            menuBet bet = new menuBet(sistema, index);
+            if(bet.getStatusReturn()){
+            }
+        }
+        
+//System.out.println(sistema.getActiveUser());
         
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -365,10 +369,10 @@ public final class MenuTournament extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelMount;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel jtimer;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -19,7 +19,8 @@ public class User implements Serializable {
     private String password;
     private Lista<Double> withdrawals = new Lista<Double>();
     private Lista<Double> deposits = new Lista<Double>();
-    private Lista<Bet> Bets = new Lista<Bet>();
+    private Lista<String> BetsLoses = new Lista<String>();
+    private Lista<String> BetsWon = new Lista<String>();
 
     /**
      * COnstructor of the class
@@ -43,8 +44,13 @@ public class User implements Serializable {
         withdrawals.add(mount);
     }
 
-    public void bet(Double mount) {
-        //this.activeUser.setMount(activeUser.getMount() - mount);
+    public void bet(Double mount, boolean won, String guyBet) {
+        withdrawal(mount);
+        if(won){
+            BetsWon.add(guyBet);
+        }else{
+            BetsLoses.add(guyBet);
+        }
     }
 
     /**
@@ -135,6 +141,8 @@ public class User implements Serializable {
      * @return String
      */
     public String toString() {
+        System.out.println("Loses "+BetsLoses);
+        System.out.println("Won "+BetsWon);
         return this.name + " " + this.mount + " " + this.password;
     }
 }

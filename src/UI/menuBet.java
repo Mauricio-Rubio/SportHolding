@@ -17,7 +17,18 @@ import Clases.User;
 public final class menuBet extends javax.swing.JFrame {
 
     Sistema sistema;
-
+    private String betGuy = "";
+    private int INDEXX;
+    private boolean statusReturn = false;
+    
+    public Sistema getSistema(){
+        return this.sistema;
+    }
+    
+    public boolean getStatusReturn(){
+        return this.statusReturn;
+    }
+    
     public menuBet(Sistema sistema, int index) {
         int index2;
         DataBase.showDB("Users.txt");
@@ -28,7 +39,9 @@ public final class menuBet extends javax.swing.JFrame {
         this.sistema = sistema;
         if (index % 2 == 0) {
             index2 = index * 2;
+            //jP1.setText(sistema.getActiveTournament().getPlayers1()[index2].getName());
             jP1.setText(sistema.getActiveTournament().getPlayers1()[index2].getName());
+            
             this.jLPC1.setText("quota " + String.valueOf(Operations.betProbability(sistema.getActiveTournament().getPlayers1()[index2])));
             jP2.setText(sistema.getActiveTournament().getPlayers1()[index2 + 1].getName());
             this.jLPC2.setText("quota " + String.valueOf(Operations.betProbability(sistema.getActiveTournament().getPlayers1()[index2 + 1])));
@@ -39,11 +52,13 @@ public final class menuBet extends javax.swing.JFrame {
             jP2.setText(sistema.getActiveTournament().getPlayers1()[index2 + 1].getName());
             this.jLPC2.setText("quota " + String.valueOf(Operations.betProbability(sistema.getActiveTournament().getPlayers1()[index2 + 1])));
         }
+        jP1.setActionCommand(jP1.getText());
+        jP2.setActionCommand(jP2.getText());
         jLMount.setText(String.valueOf(sistema.getActiveUser().getMount()));
-        winnerArr(index);
+        this.INDEXX = index;
     }
 
-    public void winnerArr(int index) {
+    public boolean winnerArr(int index) {
         Player[] aux = null;
         if (index >= 0 && index < 8) {
             aux = sistema.winner(1);
@@ -60,13 +75,16 @@ public final class menuBet extends javax.swing.JFrame {
         }else{
             System.out.println("No entro a ningun caso");
         }
-        winner(aux, index);
+        return winner(aux, index);
     }
 
-    public void winner(Player[] arr, int index) {
+    public boolean winner(Player[] arr, int index) {
         for (Player u : arr) {
-            System.out.println("----->"+u);
+            if(u.getName().equals(betGuy)){
+                return true;
+            }
         }
+        return false;
     }
 
     /**
@@ -78,18 +96,19 @@ public final class menuBet extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLMount = new javax.swing.JLabel();
-        jP1 = new javax.swing.JLabel();
         btnLog = new javax.swing.JButton();
         jLPC1 = new javax.swing.JLabel();
-        jP2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLPC2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jP1 = new javax.swing.JRadioButton();
+        jP2 = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,11 +125,6 @@ public final class menuBet extends javax.swing.JFrame {
         jLMount.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(jLMount, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 130, 30));
 
-        jP1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jP1.setForeground(new java.awt.Color(255, 255, 255));
-        jP1.setText("1");
-        jPanel1.add(jP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 200, 30));
-
         btnLog.setBackground(new java.awt.Color(214, 169, 92));
         btnLog.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnLog.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,17 +134,12 @@ public final class menuBet extends javax.swing.JFrame {
                 btnLogActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 75, 35));
+        jPanel1.add(btnLog, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 75, 30));
 
         jLPC1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLPC1.setForeground(new java.awt.Color(255, 255, 255));
         jLPC1.setText("1");
         jPanel1.add(jLPC1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 200, 30));
-
-        jP2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jP2.setForeground(new java.awt.Color(255, 255, 255));
-        jP2.setText("1");
-        jPanel1.add(jP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 200, 30));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,6 +171,21 @@ public final class menuBet extends javax.swing.JFrame {
         });
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 80, 50));
 
+        jP1.setBackground(new java.awt.Color(214, 169, 92));
+        buttonGroup1.add(jP1);
+        jP1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jP1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jP1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 69, 160, 30));
+
+        jP2.setBackground(new java.awt.Color(214, 169, 92));
+        buttonGroup1.add(jP2);
+        jP2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(jP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 160, 30));
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Fondo.png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 450));
 
@@ -181,13 +205,17 @@ public final class menuBet extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
+        betGuy = buttonGroup1.getSelection().getActionCommand();
+        //System.out.println(auxGuy);
         User aux = sistema.getActiveUser();
         try {
             Double mount = Double.valueOf(jTextField1.getText());
-            if (mount >= 50 && aux.getMount() >= mount) {
+            if (mount >= 50 && aux.getMount() >= mount && betGuy != null) {
                 int z = JOptionPane.showConfirmDialog(this, "Shure you want to bet?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (z == JOptionPane.YES_OPTION) {
-                    sistema.bet(mount);
+                if (z == JOptionPane.YES_OPTION) {               
+                    System.out.println("Guardando al imbecil "+betGuy);
+                    sistema.bet(mount, winnerArr(INDEXX), betGuy);
+                    statusReturn = true;
                     this.dispose();
                 }
             }
@@ -199,6 +227,10 @@ public final class menuBet extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jP1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jP1ActionPerformed
 
     public void closeWindow() {
         try {
@@ -246,6 +278,7 @@ public final class menuBet extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLog;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLMount;
     private javax.swing.JLabel jLPC1;
     private javax.swing.JLabel jLPC2;
@@ -254,8 +287,8 @@ public final class menuBet extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jP1;
-    private javax.swing.JLabel jP2;
+    private javax.swing.JRadioButton jP1;
+    private javax.swing.JRadioButton jP2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
