@@ -3,6 +3,7 @@ package Clases;
 import DB.DataBase;
 import Estructuras.Lista;
 import Clases.Encrypt;
+import Estructuras.Pila;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,6 +14,8 @@ public class Sistema {
 
     private User activeUser;
     private Tournament activeTournament;
+    private Pila<String> betNames = new Pila<String>();
+    private Pila<String> betProfits = new Pila<String>();
 
     public boolean login(String username, String password) {
         DataBase.showDB("Users.txt");
@@ -57,9 +60,17 @@ public class Sistema {
         this.activeUser.withdrawal(mount);
     }
 
-    public void bet(Double mount,boolean bool ,String guyBet) {
-        System.out.println("Guardando al imbecil sistem"+guyBet);
-        this.activeUser.bet(mount, bool, guyBet);
+    public void bet(double mount,boolean bool ,Player guyBet) {
+        this.activeUser.bet(mount, bool, guyBet.getName());
+        float mountF = (float) mount;
+        float mountX = Operations.betResult(guyBet, mountF);
+        betNames.push(guyBet.getName());
+        if(bool){
+            this.activeUser.deposit((double)mountX);    
+            betProfits.push(String.valueOf(mountX));
+        }else{
+            betProfits.push(String.valueOf(String.valueOf("-"+mount)));
+        }
     }
 
     public boolean signIn(String username, String password) {
@@ -154,14 +165,28 @@ public class Sistema {
         aux = new Player[lenght];
         int x = 0;
         for(i=i;i<j; i++){
-            System.out.println("i ->"+i);
             aux[x] = arr[i];
-            //System.out.println("i ->"+i);
             x++;
         }
-        System.out.println("Mostrando arreglo");
-        activeTournament.printArr();
+        //System.out.println("Mostrando arreglo");
+        //activeTournament.printArr();
         return aux;
+    }
+
+    public Pila<String> getBetNames() {
+        return betNames;
+    }
+
+    public void setBetNames(Pila<String> betNames) {
+        this.betNames = betNames;
+    }
+
+    public Pila<String> getBetProfits() {
+        return betProfits;
+    }
+
+    public void setBetProfits(Pila<String> betProfits) {
+        this.betProfits = betProfits;
     }
 
 }

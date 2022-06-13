@@ -2,6 +2,7 @@ package UI;
 
 import Clases.Player;
 import Clases.Sistema;
+import Estructuras.Pila;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -88,17 +89,17 @@ public final class MenuTournament extends javax.swing.JFrame {
             case 1:
                 i = 16;
                 b = 24;
-                a= "2";
+                a = "2";
                 break;
             case 2:
                 i = 24;
                 b = 28;
-                a= "3";
+                a = "3";
                 break;
             case 3:
                 i = 28;
                 b = 30;
-                a= "4";
+                a = "4";
                 break;
             default:
                 throw new AssertionError();
@@ -314,6 +315,8 @@ public final class MenuTournament extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Pila<String> aux = sistema.getBetNames();
+        Pila<String> aux2 = sistema.getBetProfits();
         if (optionStart == 0) {
             this.winner1();
             optionStart++;
@@ -326,20 +329,27 @@ public final class MenuTournament extends javax.swing.JFrame {
         } else {
             this.winner4();
         }
-
+        this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
+        System.out.println("Pilas lenght -->" + aux.size());
+        int lenght =aux.size();
+        for(int i = 0; i<lenght; i++){
+        
+            JOptionPane.showMessageDialog(
+                this,
+                "Has apostado a "+aux.pop() + " has obtenido "+aux2.pop());
+        }
+        sistema.setBetNames(aux);
+        sistema.setBetProfits(aux2);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int index = this.jTable1.getSelectedRow();
         TableModel model = jTable1.getModel();
-        if(model.getValueAt(index, 5) == null){
+        if (model.getValueAt(index, 5) == null) {
             menuBet bet = new menuBet(sistema, index);
-            if(bet.getStatusReturn()){
-            }
+            //System.out.println("Este es el usuario que llega "+sistema.getActiveUser());
         }
-        
-//System.out.println(sistema.getActiveUser());
-        
+        this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
     }//GEN-LAST:event_jTable1MouseClicked
 
     /* public void run(){

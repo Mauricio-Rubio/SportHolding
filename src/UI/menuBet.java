@@ -20,6 +20,9 @@ public final class menuBet extends javax.swing.JFrame {
     private String betGuy = "";
     private int INDEXX;
     private boolean statusReturn = false;
+    private Player temp1;
+    private Player temp2;
+    
     
     public Sistema getSistema(){
         return this.sistema;
@@ -41,15 +44,18 @@ public final class menuBet extends javax.swing.JFrame {
             index2 = index * 2;
             //jP1.setText(sistema.getActiveTournament().getPlayers1()[index2].getName());
             jP1.setText(sistema.getActiveTournament().getPlayers1()[index2].getName());
-            
+            temp1 = sistema.getActiveTournament().getPlayers1()[index2];
             this.jLPC1.setText("quota " + String.valueOf(Operations.betProbability(sistema.getActiveTournament().getPlayers1()[index2])));
             jP2.setText(sistema.getActiveTournament().getPlayers1()[index2 + 1].getName());
+            temp2 = sistema.getActiveTournament().getPlayers1()[index2 + 1];
             this.jLPC2.setText("quota " + String.valueOf(Operations.betProbability(sistema.getActiveTournament().getPlayers1()[index2 + 1])));
         } else {
             index2 = index * 2;
             jP1.setText(sistema.getActiveTournament().getPlayers1()[index2].getName());
+            temp1 = sistema.getActiveTournament().getPlayers1()[index2];
             this.jLPC1.setText("quota " + String.valueOf(Operations.betProbability(sistema.getActiveTournament().getPlayers1()[index2])));
             jP2.setText(sistema.getActiveTournament().getPlayers1()[index2 + 1].getName());
+            temp2 = sistema.getActiveTournament().getPlayers1()[index2 + 1];
             this.jLPC2.setText("quota " + String.valueOf(Operations.betProbability(sistema.getActiveTournament().getPlayers1()[index2 + 1])));
         }
         jP1.setActionCommand(jP1.getText());
@@ -206,6 +212,12 @@ public final class menuBet extends javax.swing.JFrame {
 
     private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
         betGuy = buttonGroup1.getSelection().getActionCommand();
+        if(betGuy.equals(temp1.getName())){
+            System.out.println("xxx "+temp1);
+        }else{
+            System.out.println("xxx "+temp2);
+            temp1 = temp2;
+        }
         //System.out.println(auxGuy);
         User aux = sistema.getActiveUser();
         try {
@@ -213,8 +225,8 @@ public final class menuBet extends javax.swing.JFrame {
             if (mount >= 50 && aux.getMount() >= mount && betGuy != null) {
                 int z = JOptionPane.showConfirmDialog(this, "Shure you want to bet?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (z == JOptionPane.YES_OPTION) {               
-                    System.out.println("Guardando al imbecil "+betGuy);
-                    sistema.bet(mount, winnerArr(INDEXX), betGuy);
+                    //System.out.println("Guardando al imbecil "+betGuy);
+                    sistema.bet(mount, winnerArr(INDEXX), temp1);
                     statusReturn = true;
                     this.dispose();
                 }
