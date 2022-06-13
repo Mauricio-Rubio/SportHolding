@@ -1,8 +1,17 @@
 package Clases;
 
+/**
+ * Class to make some names
+ * @author Alcantara Estrada Kevin Isaac
+ * @author Rubio Haro Mauricio
+ */
 public class NameMaker{
     
-    public static String nameRamdom(){
+    /**
+     * Method to make a "random" name
+     * @return String
+     */
+    public static String nameRandom(){
         String[] nombres = { "Andres", "David", "Baldomero", "Balduino", "Baldwin", "Baltasar", "Barry", "Bartolo",
         "Bartolome", "Baruc", "Baruj", "Johan", "Carlos", "Canelo", "Jose", "Golovkin", "Eduardo",
         "Carlo", "Bruno", "Baltazar", "Pedro", "Alejandro", "Mohammed", "Rene", "Mauricio", "Kevin", "Julian",
