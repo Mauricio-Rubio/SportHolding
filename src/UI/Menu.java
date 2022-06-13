@@ -23,7 +23,7 @@ public final class Menu extends javax.swing.JFrame {
         this.setTitle("Sport Holding");
         this.closeWindow();
         this.sistema = sistema;
-        this.jLabelMount.setText("Money available "+String.valueOf(sistema.getActiveUser().getMount()));
+        this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
         this.setVisible(true);
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
         //this.run();
@@ -35,7 +35,6 @@ public final class Menu extends javax.swing.JFrame {
             addWindowListener(new WindowAdapter() {
                 public void windowClosing(WindowEvent e) {
                     confirmClose();
-
                 }
             });
             this.setVisible(true);
@@ -45,11 +44,37 @@ public final class Menu extends javax.swing.JFrame {
     }
 
     public void confirmClose() {
-        int z = JOptionPane.showConfirmDialog(this, "Do you want to exit?", "Warning", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
+        /* int z = JOptionPane.showConfirmDialog(this, "Do you want to exit?", "Warning", JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
         if (z == JOptionPane.YES_OPTION) {
             sistema.saveUser();
             System.out.println("Salvando sistema");
             System.exit(0);
+        }*/
+        int seleccion = JOptionPane.showOptionDialog(
+                this,
+                "Do you want to exit?",
+                "Warning",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null, // null para icono por defecto.
+                new Object[]{"Exit", "Sign Out", "Cancel"}, // null para YES, NO y CANCEL
+                "opcion 1");
+
+        if (seleccion == 0) {
+            System.out.println("0");
+            sistema.saveUser();
+            System.out.println("Saving sistem");
+            System.exit(0);
+        }
+        if (seleccion == 1) {
+            System.out.println("1");
+            Login login = new Login();
+            sistema.saveUser();
+            System.out.println("Saving sistem");
+            dispose();
+        }
+        if (seleccion == 2) {
+            System.out.println("seleccionada opcion 2");
         }
     }
 
@@ -84,6 +109,11 @@ public final class Menu extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(214, 169, 108));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Box.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 130, 140));
 
         jButton2.setBackground(new java.awt.Color(214, 169, 108));
@@ -147,6 +177,11 @@ public final class Menu extends javax.swing.JFrame {
         MenuUser menuUser = new MenuUser(sistema);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MenuTournament menuTournament = new MenuTournament(sistema);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /* public void run(){
      new Menu().setVisible(true);
