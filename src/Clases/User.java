@@ -19,7 +19,7 @@ public class User implements Serializable{
     private Lista<Double> deposits = new Lista<Double>();
     private Lista<String> BetsLoses = new Lista<String>();
     private Lista<String> BetsWon = new Lista<String>();
-    private int lastRoundSeen = -1;
+    private int lastRoundSeen;
 
     /**
      * COnstructor of the class

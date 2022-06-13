@@ -48,7 +48,8 @@ public final class MenuTournament extends javax.swing.JFrame {
         this.sistema = sistema;
         this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
         this.setVisible(true);
-        optionStart = sistema.getActiveUser().getLastRoundSeen();
+        optionStart = -2;
+        //optionStart = sistema.getActiveUser().getLastRoundSeen();
         Tournament t = new Tournament();
         t = readObj("Torn.txt", t.getClass());
         if (t == null) {
@@ -56,12 +57,33 @@ public final class MenuTournament extends javax.swing.JFrame {
                     this,
                     "Theres not saved tournament");
         } else {
+
             this.sistema.setActiveTournament(t);
-            if (optionStart == -1) {
-                initTable(sistema.getActiveTournament().getPlayers1());
-                optionStart++;
+            int j = sistema.getActiveUser().getLastRoundSeen();
+            /*initTable(this.sistema.getActiveTournament().getPlayers1());
+            System.out.println("Entro aqui");
+            System.out.println("##### " + j);*/
+            if (j == -2) {
+                j = 1;
+            } else if (j == 0) {
+                j = 2;
+            } else if (j == 1) {
+                j = 3;
+            } else if (j == 2) {
+                j = 4;
+            } else if (j == 3) {
+                j = 5;
+            } else {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "The tournament has been ended ");
+                return;
             }
-            
+            for (int i = 0; i < j; i++) {
+                //System.out.println("Do click " + i);
+                jButton3.doClick();
+                //System.out.println("##### " + j);
+            }
         }
 
     }
@@ -360,14 +382,23 @@ public final class MenuTournament extends javax.swing.JFrame {
         User currentUser = sistema.getActiveUser();
         Pila<String> aux = sistema.getBetNames();
         Pila<String> aux2 = sistema.getBetProfits();
-        if (optionStart == -1) {
+        if (optionStart == -2) {
+            
+            initTable(this.sistema.getActiveTournament().getPlayers1());
+            currentUser.setLastRoundSeen(-2);
+            optionStart = 0;
+        } else if (optionStart == -1) {
+            
             initTable(this.sistema.chargeTournament());
+            currentUser.setLastRoundSeen(-2);
             optionStart++;
         } else if (optionStart == 0) {
+            
             currentUser.setLastRoundSeen(0);
             this.winner1();
             optionStart++;
         } else if (optionStart == 1) {
+            
             currentUser.setLastRoundSeen(1);
             this.winner2();
             optionStart++;
@@ -390,7 +421,6 @@ public final class MenuTournament extends javax.swing.JFrame {
         System.out.println("Pilas lenght -->" + aux.size());
         int lenght = aux.size();
         for (int i = 0; i < lenght; i++) {
-
             JOptionPane.showMessageDialog(
                     this,
                     "You have bet on " + aux.pop() + " you have obteined " + aux2.pop());

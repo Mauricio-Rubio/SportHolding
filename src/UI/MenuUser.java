@@ -232,7 +232,8 @@ public final class MenuUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-       MenuTournament menu = new MenuTournament(sistema, this.sistema.getActiveUser().getLastRoundSeen());
+        System.out.println("Ultima ronda vista "+this.sistema.getActiveUser().getLastRoundSeen());
+        MenuTournament menu = new MenuTournament(sistema, this.sistema.getActiveUser().getLastRoundSeen());
        this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
