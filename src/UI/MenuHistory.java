@@ -35,7 +35,7 @@ public final class MenuHistory extends javax.swing.JFrame {
         this.sistema = sistema;
         this.setVisible(true);
         initTable();
-
+        this.jLabelMount.setText(String.valueOf("Money available "+sistema.getActiveUser().getMount()));
         //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
     }
 
@@ -280,7 +280,6 @@ public final class MenuHistory extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabelMount = new javax.swing.JLabel();
@@ -306,16 +305,6 @@ public final class MenuHistory extends javax.swing.JFrame {
         });
         jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, 120, 40));
 
-        jButton3.setBackground(new java.awt.Color(214, 169, 108));
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton3.setText("Start");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 440, 120, 40));
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -338,7 +327,7 @@ public final class MenuHistory extends javax.swing.JFrame {
 
         jLabelMount.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelMount.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(jLabelMount, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 230, 40));
+        jPanel2.add(jLabelMount, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 440, 390, 50));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setForeground(new java.awt.Color(255, 102, 102));
@@ -359,37 +348,6 @@ public final class MenuHistory extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        /*initTable(this.sistema.chargeTournament());
-        Pila<String> aux = sistema.getBetNames();
-        Pila<String> aux2 = sistema.getBetProfits();
-        if(optionStart == -1){
-        optionStart++;
-        }else if (optionStart == 0) {
-            this.winner1();
-            optionStart++;
-        } else if (optionStart == 1) {
-            this.winner2();
-            optionStart++;
-        } else if (optionStart == 2) {
-            this.winner3();
-            optionStart++;
-        } else {
-            this.winner4();
-        }
-        this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
-        System.out.println("Pilas lenght -->" + aux.size());
-        int lenght =aux.size();
-        for(int i = 0; i<lenght; i++){
-        
-            JOptionPane.showMessageDialog(
-                this,
-                "You have bet on "+aux.pop() + " you have obteined "+aux2.pop());
-        }
-        sistema.setBetNames(aux);
-        sistema.setBetProfits(aux2);*/
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         MenuUser menu = new MenuUser(sistema);
@@ -420,7 +378,6 @@ public final class MenuHistory extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
