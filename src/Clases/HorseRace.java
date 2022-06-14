@@ -62,6 +62,7 @@ public class HorseRace implements Serializable{
             }catch(InterruptedException e){
                 e.printStackTrace();
             }
+       
         Lista<Jockey> results = Operations.jockeysPos(this);//determinate the posicion for each jockey
      
        Iterator<Jockey> ite = results.iterator();

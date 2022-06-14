@@ -4,6 +4,8 @@ import DB.DataBase;
 import Estructuras.Lista;
 import Clases.Encrypt;
 import Estructuras.Pila;
+import UI.MenuRace;
+
 import javax.swing.JOptionPane;
 
 /**
@@ -14,6 +16,7 @@ public class Sistema {
 
     private User activeUser;
     private Tournament activeTournament;
+    private HorseRace activeHorseRace = new HorseRace();
     private Pila<String> betNames = new Pila<String>();
     private Pila<String> betProfits = new Pila<String>();
 
@@ -31,6 +34,10 @@ public class Sistema {
         }
         return true;
 
+    }
+
+    public HorseRace getHorseRace(){
+        return this.activeHorseRace;
     }
 
     public User getActiveUser() {
@@ -70,6 +77,24 @@ public class Sistema {
             betProfits.push(String.valueOf(mountX));
         }else{
             betProfits.push(String.valueOf(String.valueOf("-"+mount)));
+        }
+    }
+
+
+    public boolean betJ(double mount,boolean bool ,Jockey guyBet) {
+        this.activeUser.bet(mount, bool, guyBet.getName());
+        float mountF = (float) mount;
+        float mountX = Operations.betResult(guyBet, mountF);
+        betNames.push(guyBet.getName());
+        if(bool){
+            this.activeUser.deposit((double)mountX);
+            betNames.push(guyBet.getName());
+            betProfits.push(String.valueOf(mountX));
+            
+            return true;
+        }else{
+            betProfits.push(String.valueOf(String.valueOf("-"+mount)));
+            return false;
         }
     }
 
