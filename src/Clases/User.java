@@ -44,6 +44,38 @@ public class User implements Serializable{
         deposits.add(mount);
     }
 
+    public Lista<Double> getWithdrawals() {
+        return withdrawals;
+    }
+
+    public void setWithdrawals(Lista<Double> withdrawals) {
+        this.withdrawals = withdrawals;
+    }
+
+    public Lista<Double> getDeposits() {
+        return deposits;
+    }
+
+    public void setDeposits(Lista<Double> deposits) {
+        this.deposits = deposits;
+    }
+
+    public Lista<String> getBetsLoses() {
+        return BetsLoses;
+    }
+
+    public void setBetsLoses(Lista<String> BetsLoses) {
+        this.BetsLoses = BetsLoses;
+    }
+
+    public Lista<String> getBetsWon() {
+        return BetsWon;
+    }
+
+    public void setBetsWon(Lista<String> BetsWon) {
+        this.BetsWon = BetsWon;
+    }
+
     public void withdrawal(Double mount) {
         this.mount = this.mount - mount;
         withdrawals.add(mount);
