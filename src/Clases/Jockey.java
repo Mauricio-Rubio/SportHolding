@@ -111,9 +111,19 @@ public String toString(){
     }
     g+="]";
     if(this.probability==0.20){
-        return this.name +" Probability: "+this.probability+"0%\n"+g;
+        return this.name;
     }
-    return this.name +" Probability: "+this.probability+"%\n"+g;
+    return this.name;
+}
+
+public String histString(){
+    String g="[";
+    for (Integer i : this.hist) {
+        g+= i+"|";
+    }
+    g+="]";
+
+    return g;
 }
 
 }

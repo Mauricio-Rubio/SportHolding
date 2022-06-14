@@ -672,7 +672,7 @@ public class Lista<T> implements Collection<T>, Serializable{
   }
 
   public T elemInd(int indice) {
-    int numAux = 1;
+    int numAux = 0;
     Nodo aux = this.cabeza;
     while (numAux < indice) {
       aux = aux.siguiente;
