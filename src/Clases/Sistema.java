@@ -157,6 +157,14 @@ public class Sistema {
         this.activeUser = activeUser;
     }
 
+    public void setActiveHorseRace() {
+        this.activeHorseRace= DataBase.readObj("Race.txt", this.activeHorseRace.getClass());
+
+        if(this.activeHorseRace==null){
+            this.activeHorseRace= new HorseRace();
+        }
+    }
+
     public Player[] winner(int round) {
         Player []arr = activeTournament.getPlayers1();
         Player[] aux;

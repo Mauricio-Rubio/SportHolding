@@ -204,9 +204,9 @@ public final class menuBetJockey extends javax.swing.JFrame {
                     
                     float gains = Operations.betResult(temp1, m);
                     if(won){
-                       MenuRace.msg("Ganaste la apuesta \nApostaste a "+temp1.getName()+"\nGanaste "+String.valueOf(gains));
+                       MenuRace.msg("You won the bet \nYou bet on "+temp1.getName()+"\nProfits: "+String.valueOf(gains));
                     }else{
-                        MenuRace.msg("Perdiste la apuesta");
+                        MenuRace.msg("You lose the bet\n Lost: "+String.valueOf(mount));
                     }
                     MenuRace.initTable(sistema.getHorseRace().getJockeys());
                     this.dispose();

@@ -41,13 +41,14 @@ public class MenuRace extends javax.swing.JFrame {
      */
     public MenuRace(Sistema sistema) {
         initComponents();
-        this.setTitle("Sport HOlding");
+        this.setTitle("Sport Holding");
         this.closeWindow();
         this.sistema = sistema;
         this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
         this.t = new ThreadRace(sistema);
         this.setVisible(true);
        // initTable();
+       this.sistema.setActiveHorseRace();
        initTable(sistema.getHorseRace().getJockeys());
      //msg();
      //sistema.sleepThread(2500);
@@ -161,7 +162,8 @@ public  static void racing(){
 
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        //jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabelMount = new javax.swing.JLabel();
@@ -177,15 +179,25 @@ public  static void racing(){
         jLabel2.setText("Carrera");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 170, 80));
 
-        jButton3.setBackground(new java.awt.Color(214, 169, 108));
+       /*  jButton3.setBackground(new java.awt.Color(214, 169, 108));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton3.setText("Start");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
+        });*/
+
+        jButton4.setBackground(new java.awt.Color(214, 169, 108));
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton4.setText("Back");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
         });
-        jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 440, 120, 40));
+      //  jPanel2.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 440, 120, 40));
+        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 440, 120, 40));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -212,7 +224,7 @@ public  static void racing(){
            
         });
 
-
+       
            
      
         jScrollPane2.setViewportView(jTable1);
@@ -251,12 +263,12 @@ public static void msg(String h){
    // pane.contains(p)
 
 }
-   private void jButton3ActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_jButton3ActionPerformed
+  /*  private void jButton3ActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_jButton3ActionPerformed
      Thread th = new Thread(t);
        th.run();
      
        
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }*///GEN-LAST:event_jButton3ActionPerformed
 
   private void jTable1MouseMoved(java.awt.event.MouseEvent evt){
       tempo();
@@ -281,6 +293,18 @@ public static void msg(String h){
         this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
     }
     }//GEN-LAST:event_jTable1MouseClicked
+
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        System.out.println("Tournament " + sistema.getActiveTournament());
+        if (sistema.getActiveTournament() == null) {
+            Menu menu = new Menu(sistema);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "You have already started a tournament");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     public void setNimbusLookAndFeel() {
 
         try {
@@ -303,7 +327,8 @@ public static void msg(String h){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
+ //   private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelMount;
