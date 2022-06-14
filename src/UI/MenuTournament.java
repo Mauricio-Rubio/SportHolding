@@ -2,6 +2,9 @@ package UI;
 
 import Clases.Player;
 import Clases.Sistema;
+import Clases.Tournament;
+import Clases.User;
+import static DB.DataBase.readObj;
 import Estructuras.Pila;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
@@ -33,8 +36,56 @@ public final class MenuTournament extends javax.swing.JFrame {
         this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
         this.setVisible(true);
         //initTable();
-        
-        //this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("Images/Logo.png")));
+    }
+
+    /**
+     * Creates new form Login
+     */
+    public MenuTournament(Sistema sistema, int lastSeen) {
+        initComponents();
+        this.setTitle("Sport Holding");
+        this.closeWindow();
+        this.sistema = sistema;
+        this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
+        this.setVisible(true);
+        optionStart = -2;
+        //optionStart = sistema.getActiveUser().getLastRoundSeen();
+        Tournament t = new Tournament();
+        t = readObj("Torn.txt", t.getClass());
+        if (t == null) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Theres not saved tournament");
+        } else {
+
+            this.sistema.setActiveTournament(t);
+            int j = sistema.getActiveUser().getLastRoundSeen();
+            /*initTable(this.sistema.getActiveTournament().getPlayers1());
+            System.out.println("Entro aqui");
+            System.out.println("##### " + j);*/
+            if (j == -2) {
+                j = 1;
+            } else if (j == 0) {
+                j = 2;
+            } else if (j == 1) {
+                j = 3;
+            } else if (j == 2) {
+                j = 4;
+            } else if (j == 3) {
+                j = 5;
+            } else {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "The tournament has been ended ");
+                return;
+            }
+            for (int i = 0; i < j; i++) {
+                //System.out.println("Do click " + i);
+                jButton3.doClick();
+                //System.out.println("##### " + j);
+            }
+        }
+
     }
 
     private void initTable(Player[] arr) {
@@ -172,6 +223,7 @@ public final class MenuTournament extends javax.swing.JFrame {
         Player[] arr = sistema.getActiveTournament().getPlayers1();
         String[] row = new String[6];
         int x = 30;
+        this.sistema.sleepThread(1200);
         for (int i = 28; i < 30; i += 2) {
             row[0] = "4";
             row[1] = arr[i].getName();
@@ -327,34 +379,55 @@ public final class MenuTournament extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        initTable(this.sistema.chargeTournament());
+        User currentUser = sistema.getActiveUser();
         Pila<String> aux = sistema.getBetNames();
         Pila<String> aux2 = sistema.getBetProfits();
-        if(optionStart == -1){
-        optionStart++;
-        }else if (optionStart == 0) {
+        if (optionStart == -2) {
+            
+            initTable(this.sistema.getActiveTournament().getPlayers1());
+            currentUser.setLastRoundSeen(-2);
+            optionStart = 0;
+        } else if (optionStart == -1) {
+            
+            initTable(this.sistema.chargeTournament());
+            currentUser.setLastRoundSeen(-2);
+            optionStart++;
+        } else if (optionStart == 0) {
+            
+            currentUser.setLastRoundSeen(0);
             this.winner1();
             optionStart++;
         } else if (optionStart == 1) {
+            
+            currentUser.setLastRoundSeen(1);
             this.winner2();
             optionStart++;
         } else if (optionStart == 2) {
+            currentUser.setLastRoundSeen(2);
             this.winner3();
             optionStart++;
-        } else {
+        } else if (optionStart == 3) {
+            currentUser.setLastRoundSeen(3);
             this.winner4();
+            optionStart++;
+        }
+        if (optionStart >= 4) {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "The tournament has been ended ");
+            sistema.setActiveTournament(null);
         }
         this.jLabelMount.setText("Money available " + String.valueOf(sistema.getActiveUser().getMount()));
         System.out.println("Pilas lenght -->" + aux.size());
-        int lenght =aux.size();
-        for(int i = 0; i<lenght; i++){
-        
+        int lenght = aux.size();
+        for (int i = 0; i < lenght; i++) {
             JOptionPane.showMessageDialog(
-                this,
-                "You have bet on "+aux.pop() + " you have obteined "+aux2.pop());
+                    this,
+                    "You have bet on " + aux.pop() + " you have obteined " + aux2.pop());
         }
         sistema.setBetNames(aux);
         sistema.setBetProfits(aux2);
+        sistema.setActiveUser(currentUser);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -368,11 +441,11 @@ public final class MenuTournament extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        System.out.println("Tournament "+sistema.getActiveTournament());
-        if(sistema.getActiveTournament() == null){
+        System.out.println("Tournament " + sistema.getActiveTournament());
+        if (sistema.getActiveTournament() == null) {
             Menu menu = new Menu(sistema);
             this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "You have already started a tournament");
         }
     }//GEN-LAST:event_jButton4ActionPerformed

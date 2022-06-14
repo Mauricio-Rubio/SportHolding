@@ -22,16 +22,15 @@ public final class menuBet extends javax.swing.JFrame {
     private boolean statusReturn = false;
     private Player temp1;
     private Player temp2;
-    
-    
-    public Sistema getSistema(){
+
+    public Sistema getSistema() {
         return this.sistema;
     }
-    
-    public boolean getStatusReturn(){
+
+    public boolean getStatusReturn() {
         return this.statusReturn;
     }
-    
+
     public menuBet(Sistema sistema, int index) {
         int index2;
         DataBase.showDB("Users.txt");
@@ -78,7 +77,7 @@ public final class menuBet extends javax.swing.JFrame {
         } else if (index == 14) {
             aux = sistema.winner(4);
             System.out.println("Opcion 4");
-        }else{
+        } else {
             System.out.println("No entro a ningun caso");
         }
         return winner(aux, index);
@@ -86,7 +85,7 @@ public final class menuBet extends javax.swing.JFrame {
 
     public boolean winner(Player[] arr, int index) {
         for (Player u : arr) {
-            if(u.getName().equals(betGuy)){
+            if (u.getName().equals(betGuy)) {
                 return true;
             }
         }
@@ -212,10 +211,10 @@ public final class menuBet extends javax.swing.JFrame {
 
     private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
         betGuy = buttonGroup1.getSelection().getActionCommand();
-        if(betGuy.equals(temp1.getName())){
-            System.out.println("xxx "+temp1);
-        }else{
-            System.out.println("xxx "+temp2);
+        if (betGuy.equals(temp1.getName())) {
+            System.out.println("xxx " + temp1);
+        } else {
+            System.out.println("xxx " + temp2);
             temp1 = temp2;
         }
         //System.out.println(auxGuy);
@@ -224,15 +223,18 @@ public final class menuBet extends javax.swing.JFrame {
             Double mount = Double.valueOf(jTextField1.getText());
             if (mount >= 50 && aux.getMount() >= mount && betGuy != null) {
                 int z = JOptionPane.showConfirmDialog(this, "Shure you want to bet?", "Warning", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (z == JOptionPane.YES_OPTION) {               
-                    //System.out.println("Guardando al imbecil "+betGuy);
+                if (z == JOptionPane.YES_OPTION) {
                     sistema.bet(mount, winnerArr(INDEXX), temp1);
                     statusReturn = true;
                     this.dispose();
                 }
+            } else {
+                throw new Exception();
             }
         } catch (Exception e) {
-
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Verify your data ");
         }
     }//GEN-LAST:event_btnLogActionPerformed
 
